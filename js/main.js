@@ -1,6 +1,6 @@
 /* ============================================
    JAMES KIRKHAM — PORTFOLIO
-   Theme Toggle, Scroll Reveals, Nav, Slider
+   Theme Toggle, Scroll Reveals, Nav, Modal
    ============================================ */
 
 (function () {
@@ -15,7 +15,6 @@
         localStorage.setItem('theme', theme);
     }
 
-    // Load saved theme or respect system preference
     const saved = localStorage.getItem('theme');
     if (saved) {
         setTheme(saved);
@@ -38,7 +37,6 @@
         document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close nav when a link is clicked
     navLinks.querySelectorAll('.nav__link').forEach(function (link) {
         link.addEventListener('click', function () {
             hamburger.classList.remove('active');
@@ -67,7 +65,6 @@
             observer.observe(el);
         });
     } else {
-        // Fallback: show everything
         reveals.forEach(function (el) {
             el.classList.add('visible');
         });
@@ -75,18 +72,14 @@
 
     // ---------- NAVBAR SCROLL EFFECT ----------
     var nav = document.getElementById('nav');
-    var lastScroll = 0;
 
     window.addEventListener('scroll', function () {
         var current = window.pageYOffset;
-
         if (current > 100) {
             nav.style.boxShadow = 'var(--shadow)';
         } else {
             nav.style.boxShadow = 'none';
         }
-
-        lastScroll = current;
     }, { passive: true });
 
     // ---------- ACTIVE NAV LINK ON SCROLL ----------
@@ -108,7 +101,7 @@
             });
         }, {
             threshold: 0.3,
-            rootMargin: '-' + (parseInt(getComputedStyle(root).getPropertyValue('--nav-height')) || 72) + 'px 0px -50% 0px'
+            rootMargin: '-72px 0px -50% 0px'
         });
 
         sections.forEach(function (section) {
@@ -116,80 +109,192 @@
         });
     }
 
-    // ---------- TESTIMONIAL SLIDER ----------
-    var slider = document.getElementById('testimonialSlider');
-    var prevBtn = document.getElementById('testimonialPrev');
-    var nextBtn = document.getElementById('testimonialNext');
-    var dotsContainer = document.getElementById('testimonialDots');
-    var cards = slider ? slider.querySelectorAll('.testimonial-card') : [];
-    var currentSlide = 0;
-
-    function createDots() {
-        if (!dotsContainer) return;
-        for (var i = 0; i < cards.length; i++) {
-            var dot = document.createElement('button');
-            dot.className = 'testimonials__dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-            dot.setAttribute('data-index', i);
-            dot.addEventListener('click', function () {
-                goToSlide(parseInt(this.getAttribute('data-index')));
-            });
-            dotsContainer.appendChild(dot);
+    // ---------- PROJECT DETAIL MODAL ----------
+    var projectData = {
+        selfquest: {
+            title: 'SelfQuest',
+            role: 'Founder & Developer',
+            desc: 'A gamified fitness tracker that turns your self-improvement journey into an RPG-style adventure. Built solo from concept to 1.3M+ downloads and 100K daily active users. Architected scalable backend systems including JWT auth, caching layers, and cost-optimised Azure cloud infrastructure. Delivered full-stack features across iOS and Android, from UX design to deployment and analytics with PostHog.',
+            tags: ['Flutter', 'C#', 'SQL', 'Azure', 'PostHog'],
+            tagClasses: ['tag--flutter', 'tag--csharp', 'tag--csharp', 'tag--azure', 'tag--web'],
+            socials: [
+                { platform: 'TikTok', count: '72K', label: 'followers', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.52a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.72a8.2 8.2 0 004.77 1.53v-3.4a4.85 4.85 0 01-1.01-.16z"/></svg>' },
+                { platform: 'Discord', count: '16K', label: 'members', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>' }
+            ],
+            highlights: [
+                '1.3M+ downloads across iOS and Android',
+                '100K daily active users',
+                'Scalable C# backend on Azure with JWT auth and caching',
+                'Full analytics pipeline with PostHog',
+                'Solo-built: design, development, marketing, and operations'
+            ],
+            screenshots: 3,
+            links: [
+                { label: 'App Store', url: '#', icon: 'appstore' },
+                { label: 'Visit Website', url: 'https://selfquest.net', icon: 'external' }
+            ]
+        },
+        nuremi: {
+            title: 'Nuremi',
+            role: 'Lead Developer & Technical Consultant',
+            desc: 'An AI-powered concierge and interactive map application built in React Native with a Supabase backend. Led all architecture decisions, user experience design, and end-to-end technical implementation for the client.',
+            tags: ['React Native', 'Supabase', 'JavaScript'],
+            tagClasses: ['tag--react-native', 'tag--supabase', 'tag--js'],
+            socials: [],
+            highlights: [
+                'Full AI-powered concierge system',
+                'Interactive map with real-time data',
+                'Supabase backend for auth and data sync',
+                'Led architecture and UX decisions end-to-end'
+            ],
+            screenshots: 3,
+            links: [
+                { label: 'App Store', url: '#', icon: 'appstore' }
+            ]
+        },
+        twinai: {
+            title: 'TwinAI',
+            role: 'Developer',
+            desc: 'An AI-powered companion app that creates a digital twin to help users with daily tasks, decisions, and personal productivity. Built with React Native for cross-platform support.',
+            tags: ['React Native', 'JavaScript'],
+            tagClasses: ['tag--react-native', 'tag--js'],
+            socials: [],
+            highlights: [
+                'AI-powered digital companion',
+                'Cross-platform with React Native',
+                'Natural language interaction for daily tasks'
+            ],
+            screenshots: 3,
+            links: [
+                { label: 'App Store', url: '#', icon: 'appstore' }
+            ]
+        },
+        selfgrow: {
+            title: 'SelfGrow',
+            role: 'Founder & Developer',
+            desc: 'A habit-breaking app focused on social accountability through friend and group support. Building natively in Swift with a Supabase backend for real-time sync and authentication. Designed to help people break bad habits through community support rather than willpower alone.',
+            tags: ['Swift', 'Supabase', 'iOS'],
+            tagClasses: ['tag--swift', 'tag--supabase', 'tag--ios'],
+            socials: [],
+            highlights: [
+                'Native Swift for optimal iOS performance',
+                'Social accountability through friend groups',
+                'Real-time sync with Supabase backend',
+                'Focus on habit-breaking through community support'
+            ],
+            screenshots: 3,
+            links: [
+                { label: 'App Store', url: '#', icon: 'appstore' }
+            ]
         }
-    }
+    };
 
-    function updateDots() {
-        if (!dotsContainer) return;
-        var dots = dotsContainer.querySelectorAll('.testimonials__dot');
-        dots.forEach(function (dot, i) {
-            dot.classList.toggle('active', i === currentSlide);
+    var modal = document.getElementById('projectModal');
+    var modalBackdrop = document.getElementById('modalBackdrop');
+    var modalClose = document.getElementById('modalClose');
+    var modalTitle = document.getElementById('modalTitle');
+    var modalRole = document.getElementById('modalRole');
+    var modalDesc = document.getElementById('modalDesc');
+    var modalTags = document.getElementById('modalTags');
+    var modalSocials = document.getElementById('modalSocials');
+    var modalHighlights = document.getElementById('modalHighlights');
+    var modalActions = document.getElementById('modalActions');
+    var modalPhones = document.getElementById('modalPhones');
+
+    function openModal(projectId) {
+        var data = projectData[projectId];
+        if (!data) return;
+
+        modalTitle.textContent = data.title;
+        modalRole.textContent = data.role;
+        modalDesc.textContent = data.desc;
+
+        // Tags
+        modalTags.innerHTML = '';
+        data.tags.forEach(function (tag, i) {
+            var span = document.createElement('span');
+            span.className = 'tag ' + (data.tagClasses[i] || '');
+            span.textContent = tag;
+            modalTags.appendChild(span);
         });
-    }
 
-    function goToSlide(index) {
-        if (!slider || index < 0 || index >= cards.length) return;
-        currentSlide = index;
-        var card = cards[currentSlide];
-        slider.scrollTo({
-            left: card.offsetLeft - slider.offsetLeft,
-            behavior: 'smooth'
+        // Social stats
+        modalSocials.innerHTML = '';
+        if (data.socials.length > 0) {
+            data.socials.forEach(function (social) {
+                var div = document.createElement('div');
+                div.className = 'modal__social-item';
+                div.innerHTML = social.icon + '<span>' + social.count + '</span><small>' + social.label + '</small>';
+                modalSocials.appendChild(div);
+            });
+        }
+
+        // Highlights
+        modalHighlights.innerHTML = '';
+        data.highlights.forEach(function (h) {
+            var div = document.createElement('div');
+            div.className = 'modal__highlight';
+            div.textContent = h;
+            modalHighlights.appendChild(div);
         });
-        updateDots();
-    }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-            goToSlide(currentSlide > 0 ? currentSlide - 1 : cards.length - 1);
+        // Phone mockups
+        modalPhones.innerHTML = '';
+        for (var i = 0; i < data.screenshots; i++) {
+            var phone = document.createElement('div');
+            phone.innerHTML = '<div class="phone-mockup__frame">' +
+                '<div class="phone-mockup__notch"></div>' +
+                '<div class="phone-mockup__screen">' +
+                '<div class="phone-mockup__placeholder">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
+                '<span>Screen ' + (i + 1) + '</span>' +
+                '</div></div></div>';
+            modalPhones.appendChild(phone);
+        }
+
+        // Action buttons
+        modalActions.innerHTML = '';
+        data.links.forEach(function (link) {
+            var a = document.createElement('a');
+            a.href = link.url;
+            a.className = 'btn btn--primary';
+            a.textContent = link.label;
+            if (link.url !== '#') {
+                a.target = '_blank';
+                a.rel = 'noopener';
+            }
+            modalActions.appendChild(a);
         });
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            goToSlide(currentSlide < cards.length - 1 ? currentSlide + 1 : 0);
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Click handlers for project cards
+    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+            // Don't open modal if clicking an actual link
+            if (e.target.closest('a')) return;
+            openModal(this.getAttribute('data-project'));
         });
-    }
+    });
 
-    // Sync dots with scroll-snap
-    if (slider) {
-        var scrollTimeout;
-        slider.addEventListener('scroll', function () {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(function () {
-                var scrollLeft = slider.scrollLeft;
-                var cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(slider).gap || 0);
-                var index = Math.round(scrollLeft / cardWidth);
-                if (index >= 0 && index < cards.length && index !== currentSlide) {
-                    currentSlide = index;
-                    updateDots();
-                }
-            }, 50);
-        }, { passive: true });
-    }
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
 
-    createDots();
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
+        }
+    });
 
     // ---------- IFRAME FALLBACK ----------
-    // If iframe fails to load, show the fallback
     document.querySelectorAll('.browser-mockup__viewport iframe').forEach(function (iframe) {
         iframe.addEventListener('error', function () {
             var fallback = this.parentElement.querySelector('.browser-mockup__fallback');
@@ -199,10 +304,8 @@
             }
         });
 
-        // Also set a timeout in case the iframe loads but is blank
         setTimeout(function () {
             try {
-                // If we can't access the iframe content (CORS), show fallback
                 if (iframe.contentDocument && iframe.contentDocument.body && !iframe.contentDocument.body.innerHTML) {
                     var fallback = iframe.parentElement.querySelector('.browser-mockup__fallback');
                     if (fallback) {
@@ -210,7 +313,7 @@
                     }
                 }
             } catch (e) {
-                // CORS error means site loaded successfully — iframe is fine
+                // CORS = site loaded fine
             }
         }, 5000);
     });
