@@ -1678,19 +1678,27 @@ img {
 
 .modal__body {
     display: flex;
-    gap: var(--space-3xl);
-    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-2xl);
 }
 
 .modal__screenshots {
-    flex-shrink: 0;
-    min-width: 300px;
+    width: 100%;
 }
 
 .modal__phone-row {
     display: flex;
     gap: var(--space-lg);
-    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-md);
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+}
+
+.modal__phone-row > div {
+    scroll-snap-align: start;
+    flex-shrink: 0;
 }
 
 .modal__phone-row .phone-mockup__frame {

@@ -128,9 +128,10 @@
                 'Full analytics pipeline with PostHog',
                 'Solo-built: design, development, marketing, and operations'
             ],
-            screenshots: 3,
+            screenshots: 6,
             links: [
                 { label: 'App Store', url: '#', icon: 'appstore' },
+                { label: 'Google Play', url: '#', icon: 'playstore' },
                 { label: 'Visit Website', url: 'https://selfquest.net', icon: 'external' }
             ]
         },
@@ -147,26 +148,29 @@
                 'Supabase backend for auth and data sync',
                 'Led architecture and UX decisions end-to-end'
             ],
-            screenshots: 3,
+            screenshots: 6,
             links: [
-                { label: 'App Store', url: '#', icon: 'appstore' }
+                { label: 'App Store', url: '#', icon: 'appstore' },
+                { label: 'Google Play', url: '#', icon: 'playstore' }
             ]
         },
         twinai: {
             title: 'TwinAI',
             role: 'Developer',
-            desc: 'An AI-powered companion app that creates a digital twin to help users with daily tasks, decisions, and personal productivity. Built with React Native for cross-platform support.',
-            tags: ['React Native', 'JavaScript'],
-            tagClasses: ['tag--react-native', 'tag--js'],
+            desc: 'An AI-powered companion app that creates a digital twin to help users with daily tasks, decisions, and personal productivity. Built with React Native and Supabase for cross-platform support with a real-time backend.',
+            tags: ['React Native', 'Supabase'],
+            tagClasses: ['tag--react-native', 'tag--supabase'],
             socials: [],
             highlights: [
                 'AI-powered digital companion',
-                'Cross-platform with React Native',
+                'Cross-platform with React Native (iOS & Android)',
+                'Supabase backend for real-time data and auth',
                 'Natural language interaction for daily tasks'
             ],
-            screenshots: 3,
+            screenshots: 6,
             links: [
-                { label: 'App Store', url: '#', icon: 'appstore' }
+                { label: 'App Store', url: '#', icon: 'appstore' },
+                { label: 'Google Play', url: '#', icon: 'playstore' }
             ]
         },
         selfgrow: {
@@ -182,7 +186,7 @@
                 'Real-time sync with Supabase backend',
                 'Focus on habit-breaking through community support'
             ],
-            screenshots: 3,
+            screenshots: 6,
             links: [
                 { label: 'App Store', url: '#', icon: 'appstore' }
             ]
