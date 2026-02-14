@@ -34,7 +34,7 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
     --space-4xl: 6rem;
-    --space-section: clamp(4rem, 8vw, 8rem);
+    --space-section: clamp(3rem, 6vw, 5rem);
 
     /* Layout */
     --max-width: 1200px;
@@ -658,10 +658,15 @@ img {
 /* Project Card */
 .project-card {
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card__info {
     margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .project-card__name {
@@ -1512,21 +1517,23 @@ img {
     }
 
     .modal__body {
-        flex-direction: column;
-    }
-
-    .modal__screenshots {
-        min-width: 0;
+        grid-template-columns: 1fr;
     }
 
     .modal__phone-row {
-        gap: var(--space-md);
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-sm);
     }
 
     .modal__phone-row .phone-mockup__frame {
-        width: 120px;
-        height: 250px;
-        border-radius: 22px;
+        max-width: 100px;
+        height: 210px;
+        border-radius: 20px;
+    }
+
+    .modal__phone-row .phone-mockup__notch {
+        width: 50px;
+        height: 14px;
     }
 }
 
@@ -1586,7 +1593,8 @@ img {
 /* ---------- PROJECT EXPAND BUTTON ---------- */
 .project-card__expand {
     display: inline-block;
-    margin-top: var(--space-sm);
+    margin-top: auto;
+    padding-top: var(--space-sm);
     padding: 0.4rem 1rem;
     font-family: var(--font);
     font-size: var(--fs-xs);
@@ -1677,9 +1685,10 @@ img {
 }
 
 .modal__body {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: var(--space-2xl);
+    align-items: start;
 }
 
 .modal__screenshots {
@@ -1687,33 +1696,26 @@ img {
 }
 
 .modal__phone-row {
-    display: flex;
-    gap: var(--space-lg);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: var(--space-md);
-    -ms-overflow-style: none;
-    scrollbar-width: thin;
-}
-
-.modal__phone-row > div {
-    scroll-snap-align: start;
-    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
 }
 
 .modal__phone-row .phone-mockup__frame {
-    width: 140px;
-    height: 290px;
-    border-radius: 28px;
+    width: 100%;
+    max-width: 120px;
+    height: 250px;
+    border-radius: 24px;
+    margin: 0 auto;
 }
 
 .modal__phone-row .phone-mockup__notch {
-    width: 70px;
-    height: 18px;
+    width: 60px;
+    height: 16px;
 }
 
 .modal__phone-row .phone-mockup__screen {
-    border-radius: 18px;
+    border-radius: 16px;
 }
 
 .modal__details {
