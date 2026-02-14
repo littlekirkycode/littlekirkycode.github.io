@@ -719,6 +719,7 @@ img {
     display: flex;
     gap: var(--space-md);
     justify-content: center;
+    margin-bottom: var(--space-md);
 }
 
 .project-card__link {
@@ -1520,14 +1521,9 @@ img {
         grid-template-columns: 1fr;
     }
 
-    .modal__phone-row {
-        grid-template-columns: repeat(2, 100px);
-        gap: var(--space-sm);
-    }
-
     .modal__phone-row .phone-mockup__frame {
-        width: 100px;
-        height: 210px;
+        width: 90px;
+        height: 190px;
         border-radius: 20px;
     }
 
@@ -1572,7 +1568,7 @@ img {
     display: flex;
     gap: var(--space-md);
     justify-content: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
 }
 
 .social-stat {
@@ -1885,12 +1881,14 @@ img {
     }
 
     .modal__container {
-        padding: var(--space-xl);
+        padding: var(--space-lg);
         max-height: 90vh;
+        border-radius: var(--radius-lg);
     }
 
     .modal__body {
         grid-template-columns: 1fr;
+        gap: var(--space-lg);
     }
 
     .modal__screenshots {
@@ -1899,6 +1897,21 @@ img {
     }
 
     .modal__phone-row {
-        grid-template-columns: repeat(2, 120px);
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: var(--space-sm);
+        padding-bottom: var(--space-sm);
+    }
+
+    .modal__phone-row > div {
+        flex-shrink: 0;
+        scroll-snap-align: center;
+    }
+
+    .modal__phone-row .phone-mockup__frame {
+        width: 110px;
+        height: 230px;
     }
 }
