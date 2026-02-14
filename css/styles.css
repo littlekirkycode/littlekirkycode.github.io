@@ -881,6 +881,11 @@ img {
     transform: scale(0.5);
     transform-origin: top left;
     pointer-events: none;
+    transition: pointer-events 0s;
+}
+
+.browser-mockup__viewport:hover iframe {
+    pointer-events: auto;
 }
 
 .browser-mockup__fallback {
