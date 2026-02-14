@@ -301,6 +301,12 @@
 
     // ---------- IFRAME FALLBACK ----------
     document.querySelectorAll('.browser-mockup__viewport iframe').forEach(function (iframe) {
+        var loaded = false;
+
+        iframe.addEventListener('load', function () {
+            loaded = true;
+        });
+
         iframe.addEventListener('error', function () {
             var fallback = this.parentElement.querySelector('.browser-mockup__fallback');
             if (fallback) {
@@ -309,18 +315,16 @@
             }
         });
 
+        // If iframe hasn't loaded after 8s, show fallback
         setTimeout(function () {
-            try {
-                if (iframe.contentDocument && iframe.contentDocument.body && !iframe.contentDocument.body.innerHTML) {
-                    var fallback = iframe.parentElement.querySelector('.browser-mockup__fallback');
-                    if (fallback) {
-                        fallback.style.display = 'flex';
-                    }
+            if (!loaded) {
+                var fallback = iframe.parentElement.querySelector('.browser-mockup__fallback');
+                if (fallback) {
+                    fallback.style.display = 'flex';
+                    iframe.style.display = 'none';
                 }
-            } catch (e) {
-                // CORS = site loaded fine
             }
-        }, 5000);
+        }, 8000);
     });
 
     // ---------- SMOOTH SCROLL FOR CTA BUTTONS ----------
