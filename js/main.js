@@ -213,115 +213,6 @@
         }
     };
 
-    // ---------- MOBILE APPS CAROUSEL (main section) ----------
-    var carouselTrack = document.getElementById('appCarouselTrack');
-    var carouselRAF = null;
-    var carouselSpeed = 0.5;
-    var isCarouselDragging = false;
-    var carouselPauseTimeout = null;
-
-    function initAppCarousel() {
-        if (!carouselTrack) return;
-
-        // Duplicate cards for infinite loop
-        var origCards = Array.from(carouselTrack.children);
-        origCards.forEach(function (card) {
-            carouselTrack.appendChild(card.cloneNode(true));
-        });
-        origCards.forEach(function (card) {
-            carouselTrack.appendChild(card.cloneNode(true));
-        });
-
-        // Re-attach click handlers to cloned cards
-        carouselTrack.querySelectorAll('.project-card[data-project]').forEach(function (card) {
-            card.addEventListener('click', function (e) {
-                if (e.target.closest('a')) return;
-                openModal(this.getAttribute('data-project'));
-            });
-        });
-
-        startAppCarousel();
-    }
-
-    function startAppCarousel() {
-        stopAppCarousel();
-        function tick() {
-            if (!isCarouselDragging && carouselTrack.scrollWidth > carouselTrack.clientWidth) {
-                carouselTrack.scrollLeft += carouselSpeed;
-
-                var oneThird = carouselTrack.scrollWidth / 3;
-                if (carouselTrack.scrollLeft >= oneThird * 2) {
-                    carouselTrack.scrollLeft -= oneThird;
-                }
-            }
-            carouselRAF = requestAnimationFrame(tick);
-        }
-        carouselRAF = requestAnimationFrame(tick);
-    }
-
-    function stopAppCarousel() {
-        if (carouselRAF) {
-            cancelAnimationFrame(carouselRAF);
-            carouselRAF = null;
-        }
-    }
-
-    // Drag to scroll for carousel
-    var carouselDragStartX = 0;
-    var carouselDragScrollLeft = 0;
-
-    if (carouselTrack) {
-        carouselTrack.addEventListener('mousedown', function (e) {
-            isCarouselDragging = true;
-            carouselTrack.classList.add('is-dragging');
-            carouselDragStartX = e.pageX - carouselTrack.offsetLeft;
-            carouselDragScrollLeft = carouselTrack.scrollLeft;
-        });
-
-        carouselTrack.addEventListener('mousemove', function (e) {
-            if (!isCarouselDragging) return;
-            e.preventDefault();
-            var x = e.pageX - carouselTrack.offsetLeft;
-            var walk = (x - carouselDragStartX) * 1.5;
-            carouselTrack.scrollLeft = carouselDragScrollLeft - walk;
-        });
-
-        function endCarouselDrag() {
-            if (!isCarouselDragging) return;
-            isCarouselDragging = false;
-            carouselTrack.classList.remove('is-dragging');
-        }
-
-        document.addEventListener('mouseup', endCarouselDrag);
-
-        // Touch support
-        carouselTrack.addEventListener('touchstart', function (e) {
-            isCarouselDragging = true;
-            carouselDragStartX = e.touches[0].pageX - carouselTrack.offsetLeft;
-            carouselDragScrollLeft = carouselTrack.scrollLeft;
-        }, { passive: true });
-
-        carouselTrack.addEventListener('touchmove', function (e) {
-            if (!isCarouselDragging) return;
-            var x = e.touches[0].pageX - carouselTrack.offsetLeft;
-            var walk = (x - carouselDragStartX) * 1.5;
-            carouselTrack.scrollLeft = carouselDragScrollLeft - walk;
-        }, { passive: true });
-
-        carouselTrack.addEventListener('touchend', function () {
-            isCarouselDragging = false;
-        });
-
-        // Pause auto-scroll when user scrolls via wheel
-        carouselTrack.addEventListener('wheel', function () {
-            isCarouselDragging = true;
-            clearTimeout(carouselPauseTimeout);
-            carouselPauseTimeout = setTimeout(function () {
-                isCarouselDragging = false;
-            }, 2000);
-        }, { passive: true });
-    }
-
     // ---------- PROJECT DETAIL MODAL ----------
     var modal = document.getElementById('projectModal');
     var modalBackdrop = document.getElementById('modalBackdrop');
@@ -428,8 +319,13 @@
         document.body.style.overflow = '';
     }
 
-    // Initialize the mobile apps carousel (duplicates cards + starts auto-scroll)
-    initAppCarousel();
+    // Click handlers for project cards
+    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            openModal(this.getAttribute('data-project'));
+        });
+    });
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);

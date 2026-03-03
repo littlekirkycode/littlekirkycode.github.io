@@ -681,28 +681,24 @@ img {
 
 .projects__carousel-track {
     display: flex;
+    flex-wrap: nowrap;
     gap: var(--space-2xl);
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
-    cursor: grab;
     padding: var(--space-md) var(--space-lg);
+    scroll-behavior: smooth;
 }
 
 .projects__carousel-track::-webkit-scrollbar {
     display: none;
 }
 
-.projects__carousel-track.is-dragging {
-    cursor: grabbing;
-    scroll-behavior: auto;
-}
-
 .projects__carousel-track > .project-card {
-    flex-shrink: 0;
-    width: 280px;
+    flex: 0 0 280px;
+    min-width: 280px;
 }
 
 .projects__grid--web {
@@ -1428,7 +1424,8 @@ img {
 /* ---------- RESPONSIVE: TABLET ---------- */
 @media (max-width: 1024px) {
     .projects__carousel-track > .project-card {
-        width: 260px;
+        flex: 0 0 260px;
+        min-width: 260px;
     }
 
     .about__grid {
@@ -1487,7 +1484,8 @@ img {
     }
 
     .projects__carousel-track > .project-card {
-        width: 240px;
+        flex: 0 0 240px;
+        min-width: 240px;
     }
 
     .projects__grid--web {
@@ -1527,7 +1525,8 @@ img {
 
 @media (max-width: 480px) {
     .projects__carousel-track > .project-card {
-        width: 220px;
+        flex: 0 0 220px;
+        min-width: 220px;
     }
 
     .about__stats {
