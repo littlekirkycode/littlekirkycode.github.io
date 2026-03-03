@@ -352,6 +352,20 @@
         }, 8000);
     });
 
+    // ---------- CONTACT FORM ----------
+    var contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+            var subject = encodeURIComponent('Portfolio Contact from ' + name);
+            var body = encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message);
+            window.location.href = 'mailto:james.kirkham00@gmail.com?subject=' + subject + '&body=' + body;
+        });
+    }
+
     // ---------- SMOOTH SCROLL FOR CTA BUTTONS ----------
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
