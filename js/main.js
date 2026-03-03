@@ -213,94 +213,17 @@
         }
     };
 
-    // ---------- MOBILE APPS CAROUSEL (infinite auto-scroll) ----------
-    var carouselTrack = document.getElementById('appCarouselTrack');
+    // ---------- MOBILE APPS GRID (click handlers) ----------
+    function initAppGrid() {
+        var appGrid = document.getElementById('appGrid');
+        if (!appGrid) return;
 
-    function initAppCarousel() {
-        if (!carouselTrack) return;
-
-        // Duplicate cards for infinite loop
-        var origCards = Array.from(carouselTrack.children);
-        origCards.forEach(function (card) {
-            carouselTrack.appendChild(card.cloneNode(true));
-        });
-        origCards.forEach(function (card) {
-            carouselTrack.appendChild(card.cloneNode(true));
-        });
-
-        // Attach click handlers to all cards (including clones)
-        carouselTrack.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+        appGrid.querySelectorAll('.project-card[data-project]').forEach(function (card) {
             card.addEventListener('click', function (e) {
                 if (e.target.closest('a')) return;
                 openModal(this.getAttribute('data-project'));
             });
         });
-
-        // Auto-scroll
-        var isUserScrolling = false;
-        var pauseTimeout = null;
-        var raf = null;
-
-        function tick() {
-            if (!isUserScrolling && carouselTrack.scrollWidth > carouselTrack.clientWidth) {
-                carouselTrack.scrollLeft += 0.5;
-                var oneThird = carouselTrack.scrollWidth / 3;
-                if (carouselTrack.scrollLeft >= oneThird * 2) {
-                    carouselTrack.scrollLeft -= oneThird;
-                }
-            }
-            raf = requestAnimationFrame(tick);
-        }
-        raf = requestAnimationFrame(tick);
-
-        // Drag support
-        var dragStartX = 0;
-        var dragScrollLeft = 0;
-
-        carouselTrack.addEventListener('mousedown', function (e) {
-            isUserScrolling = true;
-            carouselTrack.classList.add('is-dragging');
-            dragStartX = e.pageX - carouselTrack.offsetLeft;
-            dragScrollLeft = carouselTrack.scrollLeft;
-        });
-
-        carouselTrack.addEventListener('mousemove', function (e) {
-            if (!carouselTrack.classList.contains('is-dragging')) return;
-            e.preventDefault();
-            var x = e.pageX - carouselTrack.offsetLeft;
-            carouselTrack.scrollLeft = dragScrollLeft - (x - dragStartX) * 1.5;
-        });
-
-        document.addEventListener('mouseup', function () {
-            if (!carouselTrack.classList.contains('is-dragging')) return;
-            carouselTrack.classList.remove('is-dragging');
-            clearTimeout(pauseTimeout);
-            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
-        });
-
-        // Touch support
-        carouselTrack.addEventListener('touchstart', function (e) {
-            isUserScrolling = true;
-            dragStartX = e.touches[0].pageX - carouselTrack.offsetLeft;
-            dragScrollLeft = carouselTrack.scrollLeft;
-        }, { passive: true });
-
-        carouselTrack.addEventListener('touchmove', function (e) {
-            var x = e.touches[0].pageX - carouselTrack.offsetLeft;
-            carouselTrack.scrollLeft = dragScrollLeft - (x - dragStartX) * 1.5;
-        }, { passive: true });
-
-        carouselTrack.addEventListener('touchend', function () {
-            clearTimeout(pauseTimeout);
-            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
-        });
-
-        // Wheel pause
-        carouselTrack.addEventListener('wheel', function () {
-            isUserScrolling = true;
-            clearTimeout(pauseTimeout);
-            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
-        }, { passive: true });
     }
 
     // ---------- PROJECT DETAIL MODAL ----------
@@ -353,37 +276,15 @@
             modalHighlights.appendChild(div);
         });
 
-        // Phone mockups — 2-row grid, max 6 (3 top + 3 bottom)
+        // Screenshot images — raw grid, max 6
         modalPhones.innerHTML = '';
         var maxScreenshots = Math.min(data.screenshots, 6);
         for (var i = 0; i < maxScreenshots; i++) {
-            var phone = document.createElement('div');
+            var cell = document.createElement('div');
             if (data.galleryImages && data.galleryImages[i]) {
-                phone.innerHTML = '<div class="device device-iphone-14-pro">' +
-                    '<div class="device-frame">' +
-                    '<img class="device-screen" src="' + data.galleryImages[i] + '" alt="' + data.title + ' screenshot ' + (i + 1) + '">' +
-                    '</div>' +
-                    '<div class="device-stripe"></div>' +
-                    '<div class="device-header"></div>' +
-                    '<div class="device-sensors"></div>' +
-                    '<div class="device-btns"></div>' +
-                    '<div class="device-power"></div>' +
-                    '</div>';
-            } else {
-                phone.innerHTML = '<div class="device device-iphone-14-pro">' +
-                    '<div class="device-frame">' +
-                    '<div class="device-screen phone-mockup__placeholder">' +
-                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
-                    '<span>Screen ' + (i + 1) + '</span>' +
-                    '</div></div>' +
-                    '<div class="device-stripe"></div>' +
-                    '<div class="device-header"></div>' +
-                    '<div class="device-sensors"></div>' +
-                    '<div class="device-btns"></div>' +
-                    '<div class="device-power"></div>' +
-                    '</div>';
+                cell.innerHTML = '<img src="' + data.galleryImages[i] + '" alt="' + data.title + ' screenshot ' + (i + 1) + '">';
             }
-            modalPhones.appendChild(phone);
+            modalPhones.appendChild(cell);
         }
 
         // Action buttons
@@ -409,8 +310,8 @@
         document.body.style.overflow = '';
     }
 
-    // Initialize carousel (duplicates cards, starts auto-scroll, attaches click handlers)
-    initAppCarousel();
+    // Initialize app grid click handlers
+    initAppGrid();
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);

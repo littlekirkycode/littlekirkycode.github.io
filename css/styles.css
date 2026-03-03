@@ -650,59 +650,11 @@ img {
     font-size: var(--fs-sm);
 }
 
-/* ---------- MOBILE APPS CAROUSEL ---------- */
-.projects__carousel {
-    position: relative;
-    overflow: hidden;
-    margin: 0 calc(-1 * var(--space-xl));
-    padding: 0 var(--space-xl);
-}
-
-.projects__carousel::before,
-.projects__carousel::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 60px;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.projects__carousel::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg), transparent);
-}
-
-.projects__carousel::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg), transparent);
-}
-
-.projects__carousel-track {
-    display: flex;
-    flex-wrap: nowrap;
+/* ---------- MOBILE APPS GRID ---------- */
+.projects__grid--apps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: var(--space-2xl);
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-    padding: var(--space-md) var(--space-lg);
-    cursor: grab;
-}
-
-.projects__carousel-track::-webkit-scrollbar {
-    display: none;
-}
-
-.projects__carousel-track.is-dragging {
-    cursor: grabbing;
-}
-
-.projects__carousel-track > .project-card {
-    flex: 0 0 280px;
-    min-width: 280px;
 }
 
 .projects__grid--web {
@@ -1427,11 +1379,6 @@ img {
 
 /* ---------- RESPONSIVE: TABLET ---------- */
 @media (max-width: 1024px) {
-    .projects__carousel-track > .project-card {
-        flex: 0 0 260px;
-        min-width: 260px;
-    }
-
     .about__grid {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
@@ -1487,11 +1434,6 @@ img {
         font-size: clamp(2rem, 8vw, 3.5rem);
     }
 
-    .projects__carousel-track > .project-card {
-        flex: 0 0 240px;
-        min-width: 240px;
-    }
-
     .projects__grid--web {
         grid-template-columns: 1fr;
     }
@@ -1523,11 +1465,6 @@ img {
 }
 
 @media (max-width: 480px) {
-    .projects__carousel-track > .project-card {
-        flex: 0 0 220px;
-        min-width: 220px;
-    }
-
     .about__stats {
         flex-direction: column;
         align-items: center;
@@ -1556,13 +1493,8 @@ img {
         grid-template-columns: 1fr;
     }
 
-    .modal__phone-row > div {
-        width: 90px;
-        height: 180px;
-    }
-
-    .modal__phone-row .device {
-        transform: scale(0.22);
+    .modal__phone-row {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -1727,23 +1659,20 @@ img {
 
 .modal__phone-row {
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 4px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
 }
 
 .modal__phone-row > div {
-    width: 110px;
-    height: 220px;
     overflow: hidden;
+    border-radius: var(--radius-sm);
 }
 
-.modal__phone-row .device {
-    transform: scale(0.28);
-    transform-origin: top left;
-}
-
-.modal__phone-row .device-screen {
-    object-fit: cover;
+.modal__phone-row img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-sm);
 }
 
 .modal__details {
@@ -1927,12 +1856,8 @@ img {
         min-width: 0;
     }
 
-    .modal__phone-row > div {
-        width: 80px;
-        height: 160px;
-    }
-
-    .modal__phone-row .device {
-        transform: scale(0.2);
+    .modal__phone-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
     }
 }
