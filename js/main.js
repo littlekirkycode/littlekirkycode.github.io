@@ -161,25 +161,6 @@
                 { label: 'Google Play', url: '#', icon: 'playstore' }
             ]
         },
-        twinai: {
-            title: 'TwinAI',
-            role: 'Developer',
-            desc: 'An AI-powered companion app that creates a digital twin to help users with daily tasks, decisions, and personal productivity. Built with React Native and Supabase for cross-platform support with a real-time backend.',
-            tags: ['React Native', 'Supabase'],
-            tagClasses: ['tag--react-native', 'tag--supabase'],
-            socials: [],
-            highlights: [
-                'AI-powered digital companion',
-                'Cross-platform with React Native (iOS & Android)',
-                'Supabase backend for real-time data and auth',
-                'Natural language interaction for daily tasks'
-            ],
-            screenshots: 6,
-            links: [
-                { label: 'App Store', url: '#', icon: 'appstore' },
-                { label: 'Google Play', url: '#', icon: 'playstore' }
-            ]
-        },
         selfgrow: {
             title: 'SelfGrow',
             role: 'Founder & Developer',
