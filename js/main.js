@@ -213,6 +213,96 @@
         }
     };
 
+    // ---------- MOBILE APPS CAROUSEL (infinite auto-scroll) ----------
+    var carouselTrack = document.getElementById('appCarouselTrack');
+
+    function initAppCarousel() {
+        if (!carouselTrack) return;
+
+        // Duplicate cards for infinite loop
+        var origCards = Array.from(carouselTrack.children);
+        origCards.forEach(function (card) {
+            carouselTrack.appendChild(card.cloneNode(true));
+        });
+        origCards.forEach(function (card) {
+            carouselTrack.appendChild(card.cloneNode(true));
+        });
+
+        // Attach click handlers to all cards (including clones)
+        carouselTrack.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+            card.addEventListener('click', function (e) {
+                if (e.target.closest('a')) return;
+                openModal(this.getAttribute('data-project'));
+            });
+        });
+
+        // Auto-scroll
+        var isUserScrolling = false;
+        var pauseTimeout = null;
+        var raf = null;
+
+        function tick() {
+            if (!isUserScrolling && carouselTrack.scrollWidth > carouselTrack.clientWidth) {
+                carouselTrack.scrollLeft += 0.5;
+                var oneThird = carouselTrack.scrollWidth / 3;
+                if (carouselTrack.scrollLeft >= oneThird * 2) {
+                    carouselTrack.scrollLeft -= oneThird;
+                }
+            }
+            raf = requestAnimationFrame(tick);
+        }
+        raf = requestAnimationFrame(tick);
+
+        // Drag support
+        var dragStartX = 0;
+        var dragScrollLeft = 0;
+
+        carouselTrack.addEventListener('mousedown', function (e) {
+            isUserScrolling = true;
+            carouselTrack.classList.add('is-dragging');
+            dragStartX = e.pageX - carouselTrack.offsetLeft;
+            dragScrollLeft = carouselTrack.scrollLeft;
+        });
+
+        carouselTrack.addEventListener('mousemove', function (e) {
+            if (!carouselTrack.classList.contains('is-dragging')) return;
+            e.preventDefault();
+            var x = e.pageX - carouselTrack.offsetLeft;
+            carouselTrack.scrollLeft = dragScrollLeft - (x - dragStartX) * 1.5;
+        });
+
+        document.addEventListener('mouseup', function () {
+            if (!carouselTrack.classList.contains('is-dragging')) return;
+            carouselTrack.classList.remove('is-dragging');
+            clearTimeout(pauseTimeout);
+            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
+        });
+
+        // Touch support
+        carouselTrack.addEventListener('touchstart', function (e) {
+            isUserScrolling = true;
+            dragStartX = e.touches[0].pageX - carouselTrack.offsetLeft;
+            dragScrollLeft = carouselTrack.scrollLeft;
+        }, { passive: true });
+
+        carouselTrack.addEventListener('touchmove', function (e) {
+            var x = e.touches[0].pageX - carouselTrack.offsetLeft;
+            carouselTrack.scrollLeft = dragScrollLeft - (x - dragStartX) * 1.5;
+        }, { passive: true });
+
+        carouselTrack.addEventListener('touchend', function () {
+            clearTimeout(pauseTimeout);
+            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
+        });
+
+        // Wheel pause
+        carouselTrack.addEventListener('wheel', function () {
+            isUserScrolling = true;
+            clearTimeout(pauseTimeout);
+            pauseTimeout = setTimeout(function () { isUserScrolling = false; }, 2000);
+        }, { passive: true });
+    }
+
     // ---------- PROJECT DETAIL MODAL ----------
     var modal = document.getElementById('projectModal');
     var modalBackdrop = document.getElementById('modalBackdrop');
@@ -319,13 +409,8 @@
         document.body.style.overflow = '';
     }
 
-    // Click handlers for project cards
-    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
-        card.addEventListener('click', function (e) {
-            if (e.target.closest('a')) return;
-            openModal(this.getAttribute('data-project'));
-        });
-    });
+    // Initialize carousel (duplicates cards, starts auto-scroll, attaches click handlers)
+    initAppCarousel();
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
