@@ -189,15 +189,16 @@
         selfaware: {
             title: 'SelfAware',
             role: 'Founder & Developer',
-            desc: 'A mindfulness and self-awareness app designed for personal reflection and growth. Built natively in Swift with a Supabase backend.',
-            tags: ['Swift', 'Supabase', 'iOS'],
-            tagClasses: ['tag--swift', 'tag--supabase', 'tag--ios'],
+            desc: 'An AI-first concierge and life OS app built in React Native (Expo/TypeScript) with Supabase backend. Features an agentic AI system using OpenAI Responses API with custom MCP tooling, RAG pipeline with pgvector embeddings, real-time streaming chat, multi-modal input (Vision, Whisper), and 5+ third-party API integrations.',
+            tags: ['React Native', 'Supabase', 'OpenAI', 'TypeScript'],
+            tagClasses: ['tag--react-native', 'tag--supabase', 'tag--web', 'tag--web'],
             socials: [],
             highlights: [
-                'Native Swift for optimal iOS performance',
-                'Mindfulness and self-reflection tools',
-                'Supabase backend for data sync',
-                'Designed for personal growth'
+                'Agentic AI system with OpenAI + custom MCP tooling',
+                'RAG pipeline with pgvector embeddings and semantic search',
+                'Real-time streaming AI chat with SSE',
+                'Multi-modal input: Vision, Whisper, speech recognition',
+                '5+ third-party API integrations (Amadeus, Ticketmaster, Google Places)'
             ],
             screenshots: 5,
             galleryImages: [

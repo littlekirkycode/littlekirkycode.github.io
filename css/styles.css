@@ -973,6 +973,37 @@ img {
     line-height: 1.6;
 }
 
+.timeline__highlights {
+    list-style: none;
+    margin-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.timeline__highlights li {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: var(--space-md);
+    position: relative;
+}
+
+.timeline__highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.timeline__highlights li strong {
+    color: var(--text);
+}
+
 /* ---------- TESTIMONIALS ---------- */
 .testimonials__slider {
     display: flex;
