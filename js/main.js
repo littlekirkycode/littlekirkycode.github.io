@@ -213,6 +213,116 @@
         }
     };
 
+    // ---------- MOBILE APPS CAROUSEL (main section) ----------
+    var carouselTrack = document.getElementById('appCarouselTrack');
+    var carouselRAF = null;
+    var carouselSpeed = 0.5;
+    var isCarouselDragging = false;
+    var carouselPauseTimeout = null;
+
+    function initAppCarousel() {
+        if (!carouselTrack) return;
+
+        // Duplicate cards for infinite loop
+        var origCards = Array.from(carouselTrack.children);
+        origCards.forEach(function (card) {
+            carouselTrack.appendChild(card.cloneNode(true));
+        });
+        origCards.forEach(function (card) {
+            carouselTrack.appendChild(card.cloneNode(true));
+        });
+
+        // Re-attach click handlers to cloned cards
+        carouselTrack.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+            card.addEventListener('click', function (e) {
+                if (e.target.closest('a')) return;
+                openModal(this.getAttribute('data-project'));
+            });
+        });
+
+        startAppCarousel();
+    }
+
+    function startAppCarousel() {
+        stopAppCarousel();
+        function tick() {
+            if (!isCarouselDragging && carouselTrack.scrollWidth > carouselTrack.clientWidth) {
+                carouselTrack.scrollLeft += carouselSpeed;
+
+                var oneThird = carouselTrack.scrollWidth / 3;
+                if (carouselTrack.scrollLeft >= oneThird * 2) {
+                    carouselTrack.scrollLeft -= oneThird;
+                }
+            }
+            carouselRAF = requestAnimationFrame(tick);
+        }
+        carouselRAF = requestAnimationFrame(tick);
+    }
+
+    function stopAppCarousel() {
+        if (carouselRAF) {
+            cancelAnimationFrame(carouselRAF);
+            carouselRAF = null;
+        }
+    }
+
+    // Drag to scroll for carousel
+    var carouselDragStartX = 0;
+    var carouselDragScrollLeft = 0;
+
+    if (carouselTrack) {
+        carouselTrack.addEventListener('mousedown', function (e) {
+            isCarouselDragging = true;
+            carouselTrack.classList.add('is-dragging');
+            carouselDragStartX = e.pageX - carouselTrack.offsetLeft;
+            carouselDragScrollLeft = carouselTrack.scrollLeft;
+        });
+
+        carouselTrack.addEventListener('mousemove', function (e) {
+            if (!isCarouselDragging) return;
+            e.preventDefault();
+            var x = e.pageX - carouselTrack.offsetLeft;
+            var walk = (x - carouselDragStartX) * 1.5;
+            carouselTrack.scrollLeft = carouselDragScrollLeft - walk;
+        });
+
+        function endCarouselDrag() {
+            if (!isCarouselDragging) return;
+            isCarouselDragging = false;
+            carouselTrack.classList.remove('is-dragging');
+        }
+
+        document.addEventListener('mouseup', endCarouselDrag);
+
+        // Touch support
+        carouselTrack.addEventListener('touchstart', function (e) {
+            isCarouselDragging = true;
+            carouselDragStartX = e.touches[0].pageX - carouselTrack.offsetLeft;
+            carouselDragScrollLeft = carouselTrack.scrollLeft;
+        }, { passive: true });
+
+        carouselTrack.addEventListener('touchmove', function (e) {
+            if (!isCarouselDragging) return;
+            var x = e.touches[0].pageX - carouselTrack.offsetLeft;
+            var walk = (x - carouselDragStartX) * 1.5;
+            carouselTrack.scrollLeft = carouselDragScrollLeft - walk;
+        }, { passive: true });
+
+        carouselTrack.addEventListener('touchend', function () {
+            isCarouselDragging = false;
+        });
+
+        // Pause auto-scroll when user scrolls via wheel
+        carouselTrack.addEventListener('wheel', function () {
+            isCarouselDragging = true;
+            clearTimeout(carouselPauseTimeout);
+            carouselPauseTimeout = setTimeout(function () {
+                isCarouselDragging = false;
+            }, 2000);
+        }, { passive: true });
+    }
+
+    // ---------- PROJECT DETAIL MODAL ----------
     var modal = document.getElementById('projectModal');
     var modalBackdrop = document.getElementById('modalBackdrop');
     var modalClose = document.getElementById('modalClose');
@@ -244,7 +354,7 @@
 
         // Social stats
         modalSocials.innerHTML = '';
-        if (data.socials.length > 0) {
+        if (data.socials && data.socials.length > 0) {
             data.socials.forEach(function (social) {
                 var div = document.createElement('div');
                 div.className = 'modal__social-item';
@@ -262,9 +372,10 @@
             modalHighlights.appendChild(div);
         });
 
-        // Phone mockups
+        // Phone mockups — 2-row grid, max 6 (3 top + 3 bottom)
         modalPhones.innerHTML = '';
-        for (var i = 0; i < data.screenshots; i++) {
+        var maxScreenshots = Math.min(data.screenshots, 6);
+        for (var i = 0; i < maxScreenshots; i++) {
             var phone = document.createElement('div');
             if (data.galleryImages && data.galleryImages[i]) {
                 phone.innerHTML = '<div class="device device-iphone-14-pro">' +
@@ -308,121 +419,17 @@
             modalActions.appendChild(a);
         });
 
-        // Duplicate items for infinite loop
-        var origItems = Array.from(modalPhones.children);
-        origItems.forEach(function (item) {
-            modalPhones.appendChild(item.cloneNode(true));
-        });
-        origItems.forEach(function (item) {
-            modalPhones.appendChild(item.cloneNode(true));
-        });
-
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
-
-        // Start auto-scroll after a brief delay
-        startCarousel();
     }
-
-    // ---------- CAROUSEL AUTO-SCROLL + DRAG ----------
-    var carouselRAF = null;
-    var scrollSpeed = 0.5;
-    var isUserDragging = false;
-    var pauseTimeout = null;
-
-    function startCarousel() {
-        stopCarousel();
-        function tick() {
-            if (!isUserDragging && modalPhones.scrollWidth > modalPhones.clientWidth) {
-                modalPhones.scrollLeft += scrollSpeed;
-
-                // Reset to start when reaching the duplicate section
-                var oneThird = modalPhones.scrollWidth / 3;
-                if (modalPhones.scrollLeft >= oneThird * 2) {
-                    modalPhones.scrollLeft -= oneThird;
-                }
-            }
-            carouselRAF = requestAnimationFrame(tick);
-        }
-        carouselRAF = requestAnimationFrame(tick);
-    }
-
-    function stopCarousel() {
-        if (carouselRAF) {
-            cancelAnimationFrame(carouselRAF);
-            carouselRAF = null;
-        }
-    }
-
-    // Drag to scroll
-    var dragStartX = 0;
-    var dragScrollLeft = 0;
-
-    modalPhones.addEventListener('mousedown', function (e) {
-        isUserDragging = true;
-        modalPhones.classList.add('is-dragging');
-        dragStartX = e.pageX - modalPhones.offsetLeft;
-        dragScrollLeft = modalPhones.scrollLeft;
-    });
-
-    modalPhones.addEventListener('mousemove', function (e) {
-        if (!isUserDragging) return;
-        e.preventDefault();
-        var x = e.pageX - modalPhones.offsetLeft;
-        var walk = (x - dragStartX) * 1.5;
-        modalPhones.scrollLeft = dragScrollLeft - walk;
-    });
-
-    function endDrag() {
-        if (!isUserDragging) return;
-        isUserDragging = false;
-        modalPhones.classList.remove('is-dragging');
-    }
-
-    document.addEventListener('mouseup', endDrag);
-    document.addEventListener('mouseleave', endDrag);
-
-    // Touch support
-    modalPhones.addEventListener('touchstart', function (e) {
-        isUserDragging = true;
-        dragStartX = e.touches[0].pageX - modalPhones.offsetLeft;
-        dragScrollLeft = modalPhones.scrollLeft;
-    }, { passive: true });
-
-    modalPhones.addEventListener('touchmove', function (e) {
-        if (!isUserDragging) return;
-        var x = e.touches[0].pageX - modalPhones.offsetLeft;
-        var walk = (x - dragStartX) * 1.5;
-        modalPhones.scrollLeft = dragScrollLeft - walk;
-    }, { passive: true });
-
-    modalPhones.addEventListener('touchend', function () {
-        isUserDragging = false;
-    });
-
-    // Pause auto-scroll briefly when user scrolls manually via wheel
-    modalPhones.addEventListener('wheel', function () {
-        isUserDragging = true;
-        clearTimeout(pauseTimeout);
-        pauseTimeout = setTimeout(function () {
-            isUserDragging = false;
-        }, 2000);
-    }, { passive: true });
 
     function closeModal() {
         modal.classList.remove('open');
         document.body.style.overflow = '';
-        stopCarousel();
     }
 
-    // Click handlers for project cards
-    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
-        card.addEventListener('click', function (e) {
-            // Don't open modal if clicking an actual link
-            if (e.target.closest('a')) return;
-            openModal(this.getAttribute('data-project'));
-        });
-    });
+    // Initialize the mobile apps carousel (duplicates cards + starts auto-scroll)
+    initAppCarousel();
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);

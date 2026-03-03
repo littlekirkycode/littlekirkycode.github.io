@@ -650,10 +650,59 @@ img {
     font-size: var(--fs-sm);
 }
 
-.projects__grid--mobile {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+/* ---------- MOBILE APPS CAROUSEL ---------- */
+.projects__carousel {
+    position: relative;
+    overflow: hidden;
+    margin: 0 calc(-1 * var(--space-xl));
+    padding: 0 var(--space-xl);
+}
+
+.projects__carousel::before,
+.projects__carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.projects__carousel::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.projects__carousel::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+}
+
+.projects__carousel-track {
+    display: flex;
     gap: var(--space-2xl);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.projects__carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.projects__carousel-track.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+.projects__carousel-track > .project-card {
+    flex-shrink: 0;
+    width: 280px;
 }
 
 .projects__grid--web {
@@ -1378,8 +1427,8 @@ img {
 
 /* ---------- RESPONSIVE: TABLET ---------- */
 @media (max-width: 1024px) {
-    .projects__grid--mobile {
-        grid-template-columns: repeat(2, 1fr);
+    .projects__carousel-track > .project-card {
+        width: 260px;
     }
 
     .about__grid {
@@ -1437,9 +1486,8 @@ img {
         font-size: clamp(2rem, 8vw, 3.5rem);
     }
 
-    .projects__grid--mobile {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-lg);
+    .projects__carousel-track > .project-card {
+        width: 240px;
     }
 
     .projects__grid--web {
@@ -1452,6 +1500,11 @@ img {
 
     .phone-mockup .device {
         transform: scale(0.45);
+    }
+
+    .modal__phone-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-sm);
     }
 
     .blog__grid {
@@ -1473,8 +1526,8 @@ img {
 }
 
 @media (max-width: 480px) {
-    .projects__grid--mobile {
-        grid-template-columns: 1fr;
+    .projects__carousel-track > .project-card {
+        width: 220px;
     }
 
     .about__stats {
@@ -1506,7 +1559,7 @@ img {
     }
 
     .modal__phone-row {
-        height: 260px;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .modal__phone-row .device {
@@ -1670,62 +1723,23 @@ img {
 
 .modal__screenshots {
     width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.modal__screenshots::before,
-.modal__screenshots::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.modal__screenshots::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-card), transparent);
-}
-
-.modal__screenshots::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-card), transparent);
 }
 
 .modal__phone-row {
-    display: flex;
-    gap: var(--space-lg);
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-    padding: var(--space-md) var(--space-xl);
-    cursor: grab;
-    height: 320px;
-    align-items: flex-start;
-}
-
-.modal__phone-row::-webkit-scrollbar {
-    display: none;
-}
-
-.modal__phone-row.is-dragging {
-    cursor: grabbing;
-    scroll-behavior: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-md);
 }
 
 .modal__phone-row > div {
-    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .modal__phone-row .device {
     transform: scale(0.35);
     transform-origin: top center;
-    flex-shrink: 0;
 }
 
 .modal__phone-row .device-screen {
@@ -1915,8 +1929,8 @@ img {
     }
 
     .modal__phone-row {
-        height: 280px;
-        gap: var(--space-md);
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-sm);
     }
 
     .modal__phone-row .device {
