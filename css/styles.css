@@ -750,47 +750,83 @@ img {
     pointer-events: none;
 }
 
-/* ---------- PHONE MOCKUP ---------- */
+/* ---------- PHONE MOCKUP (iPhone 15 Pro style) ---------- */
 .phone-mockup {
     display: flex;
     justify-content: center;
 }
 
 .phone-mockup__frame {
-    width: 200px;
-    height: 410px;
-    background: var(--bg-tertiary);
-    border-radius: 36px;
-    border: 3px solid var(--border);
+    width: 220px;
+    height: 448px;
+    background: #1a1a1a;
+    border-radius: 44px;
+    border: 2px solid #555;
     position: relative;
     overflow: hidden;
-    padding: 12px;
+    padding: 6px;
     transition: all var(--duration) var(--ease);
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 4px 20px rgba(0,0,0,0.3),
+        0 8px 40px rgba(0,0,0,0.15);
+}
+
+[data-theme="light"] .phone-mockup__frame {
+    background: #e8e8e8;
+    border-color: #c0c0c0;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.6),
+        0 4px 20px rgba(0,0,0,0.12),
+        0 8px 40px rgba(0,0,0,0.06);
 }
 
 .project-card:hover .phone-mockup__frame {
     border-color: var(--accent);
-    box-shadow: 0 8px 40px var(--accent-glow);
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 8px 40px var(--accent-glow),
+        0 0 60px var(--accent-glow);
 }
 
 .phone-mockup__notch {
-    width: 100px;
-    height: 24px;
-    background: var(--bg-tertiary);
-    border-radius: 0 0 16px 16px;
+    width: 90px;
+    height: 26px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
     position: absolute;
-    top: 0;
+    top: 6px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
 }
 
+.phone-mockup__notch::after {
+    content: '';
+    width: 28px;
+    height: 8px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+[data-theme="light"] .phone-mockup__notch {
+    background: #000;
+}
+
+[data-theme="light"] .phone-mockup__notch::after {
+    background: #222;
+}
+
 .phone-mockup__screen {
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    border-radius: 38px;
     overflow: hidden;
-    background: var(--bg-secondary);
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -800,6 +836,8 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .phone-mockup__placeholder {
@@ -1464,18 +1502,27 @@ img {
     }
 
     .phone-mockup__frame {
-        width: 160px;
-        height: 330px;
-        border-radius: 28px;
+        width: 180px;
+        height: 366px;
+        border-radius: 36px;
+        padding: 5px;
     }
 
     .phone-mockup__notch {
-        width: 80px;
-        height: 20px;
+        width: 75px;
+        height: 22px;
+        top: 5px;
+        border-radius: 0 0 14px 14px;
+    }
+
+    .phone-mockup__notch::after {
+        width: 24px;
+        height: 7px;
+        top: 7px;
     }
 
     .phone-mockup__screen {
-        border-radius: 18px;
+        border-radius: 31px;
     }
 
     .blog__grid {
@@ -1522,14 +1569,27 @@ img {
     }
 
     .modal__phone-row .phone-mockup__frame {
-        width: 90px;
-        height: 190px;
-        border-radius: 20px;
+        width: 100px;
+        height: 204px;
+        border-radius: 22px;
+        padding: 3px;
     }
 
     .modal__phone-row .phone-mockup__notch {
-        width: 50px;
-        height: 14px;
+        width: 44px;
+        height: 13px;
+        top: 3px;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .modal__phone-row .phone-mockup__notch::after {
+        width: 14px;
+        height: 4px;
+        top: 4px;
+    }
+
+    .modal__phone-row .phone-mockup__screen {
+        border-radius: 19px;
     }
 }
 
@@ -1699,19 +1759,28 @@ img {
 }
 
 .modal__phone-row .phone-mockup__frame {
-    width: 120px;
-    height: 250px;
-    border-radius: 24px;
+    width: 130px;
+    height: 265px;
+    border-radius: 28px;
     margin: 0 auto;
+    padding: 4px;
 }
 
 .modal__phone-row .phone-mockup__notch {
-    width: 60px;
+    width: 55px;
     height: 16px;
+    top: 4px;
+    border-radius: 0 0 10px 10px;
+}
+
+.modal__phone-row .phone-mockup__notch::after {
+    width: 18px;
+    height: 5px;
+    top: 5px;
 }
 
 .modal__phone-row .phone-mockup__screen {
-    border-radius: 16px;
+    border-radius: 24px;
 }
 
 .modal__details {
@@ -1911,7 +1980,26 @@ img {
     }
 
     .modal__phone-row .phone-mockup__frame {
-        width: 110px;
-        height: 230px;
+        width: 120px;
+        height: 244px;
+        border-radius: 26px;
+        padding: 3px;
+    }
+
+    .modal__phone-row .phone-mockup__notch {
+        width: 50px;
+        height: 14px;
+        top: 3px;
+        border-radius: 0 0 9px 9px;
+    }
+
+    .modal__phone-row .phone-mockup__notch::after {
+        width: 16px;
+        height: 4px;
+        top: 4px;
+    }
+
+    .modal__phone-row .phone-mockup__screen {
+        border-radius: 23px;
     }
 }
