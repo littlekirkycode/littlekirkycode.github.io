@@ -1625,13 +1625,13 @@ img {
 
 .modal__body {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 340px 1fr;
     gap: var(--space-2xl);
     align-items: start;
 }
 
 .modal__screenshots {
-    width: auto;
+    width: 100%;
     min-width: 0;
 }
 
