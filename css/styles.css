@@ -1506,11 +1506,11 @@ img {
     }
 
     .modal__phone-row {
-        height: 220px;
+        height: 260px;
     }
 
     .modal__phone-row .device {
-        transform: scale(0.22);
+        transform: scale(0.28);
     }
 }
 
@@ -1670,23 +1670,60 @@ img {
 
 .modal__screenshots {
     width: 100%;
-}
-
-.modal__phone-row {
-    display: grid;
-    grid-template-columns: repeat(3, 120px);
-    gap: var(--space-md);
-    justify-content: center;
-}
-
-.modal__phone-row {
+    position: relative;
     overflow: hidden;
-    height: 280px;
+}
+
+.modal__screenshots::before,
+.modal__screenshots::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.modal__screenshots::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-card), transparent);
+}
+
+.modal__screenshots::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-card), transparent);
+}
+
+.modal__phone-row {
+    display: flex;
+    gap: var(--space-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-md) var(--space-xl);
+    cursor: grab;
+    height: 320px;
     align-items: flex-start;
 }
 
+.modal__phone-row::-webkit-scrollbar {
+    display: none;
+}
+
+.modal__phone-row.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+.modal__phone-row > div {
+    flex-shrink: 0;
+}
+
 .modal__phone-row .device {
-    transform: scale(0.3);
+    transform: scale(0.35);
     transform-origin: top center;
     flex-shrink: 0;
 }
@@ -1878,24 +1915,11 @@ img {
     }
 
     .modal__phone-row {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: var(--space-sm);
-        padding-bottom: var(--space-sm);
-    }
-
-    .modal__phone-row > div {
-        flex-shrink: 0;
-        scroll-snap-align: center;
-    }
-
-    .modal__phone-row {
-        height: 240px;
+        height: 280px;
+        gap: var(--space-md);
     }
 
     .modal__phone-row .device {
-        transform: scale(0.26);
+        transform: scale(0.3);
     }
 }

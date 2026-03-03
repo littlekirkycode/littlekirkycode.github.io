@@ -308,13 +308,111 @@
             modalActions.appendChild(a);
         });
 
+        // Duplicate items for infinite loop
+        var origItems = Array.from(modalPhones.children);
+        origItems.forEach(function (item) {
+            modalPhones.appendChild(item.cloneNode(true));
+        });
+        origItems.forEach(function (item) {
+            modalPhones.appendChild(item.cloneNode(true));
+        });
+
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
+
+        // Start auto-scroll after a brief delay
+        startCarousel();
     }
+
+    // ---------- CAROUSEL AUTO-SCROLL + DRAG ----------
+    var carouselRAF = null;
+    var scrollSpeed = 0.5;
+    var isUserDragging = false;
+    var pauseTimeout = null;
+
+    function startCarousel() {
+        stopCarousel();
+        function tick() {
+            if (!isUserDragging && modalPhones.scrollWidth > modalPhones.clientWidth) {
+                modalPhones.scrollLeft += scrollSpeed;
+
+                // Reset to start when reaching the duplicate section
+                var oneThird = modalPhones.scrollWidth / 3;
+                if (modalPhones.scrollLeft >= oneThird * 2) {
+                    modalPhones.scrollLeft -= oneThird;
+                }
+            }
+            carouselRAF = requestAnimationFrame(tick);
+        }
+        carouselRAF = requestAnimationFrame(tick);
+    }
+
+    function stopCarousel() {
+        if (carouselRAF) {
+            cancelAnimationFrame(carouselRAF);
+            carouselRAF = null;
+        }
+    }
+
+    // Drag to scroll
+    var dragStartX = 0;
+    var dragScrollLeft = 0;
+
+    modalPhones.addEventListener('mousedown', function (e) {
+        isUserDragging = true;
+        modalPhones.classList.add('is-dragging');
+        dragStartX = e.pageX - modalPhones.offsetLeft;
+        dragScrollLeft = modalPhones.scrollLeft;
+    });
+
+    modalPhones.addEventListener('mousemove', function (e) {
+        if (!isUserDragging) return;
+        e.preventDefault();
+        var x = e.pageX - modalPhones.offsetLeft;
+        var walk = (x - dragStartX) * 1.5;
+        modalPhones.scrollLeft = dragScrollLeft - walk;
+    });
+
+    function endDrag() {
+        if (!isUserDragging) return;
+        isUserDragging = false;
+        modalPhones.classList.remove('is-dragging');
+    }
+
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('mouseleave', endDrag);
+
+    // Touch support
+    modalPhones.addEventListener('touchstart', function (e) {
+        isUserDragging = true;
+        dragStartX = e.touches[0].pageX - modalPhones.offsetLeft;
+        dragScrollLeft = modalPhones.scrollLeft;
+    }, { passive: true });
+
+    modalPhones.addEventListener('touchmove', function (e) {
+        if (!isUserDragging) return;
+        var x = e.touches[0].pageX - modalPhones.offsetLeft;
+        var walk = (x - dragStartX) * 1.5;
+        modalPhones.scrollLeft = dragScrollLeft - walk;
+    }, { passive: true });
+
+    modalPhones.addEventListener('touchend', function () {
+        isUserDragging = false;
+    });
+
+    // Pause auto-scroll briefly when user scrolls manually via wheel
+    modalPhones.addEventListener('wheel', function () {
+        isUserDragging = true;
+        clearTimeout(pauseTimeout);
+        pauseTimeout = setTimeout(function () {
+            isUserDragging = false;
+        }, 2000);
+    }, { passive: true });
 
     function closeModal() {
         modal.classList.remove('open');
         document.body.style.overflow = '';
+        stopCarousel();
     }
 
     // Click handlers for project cards
