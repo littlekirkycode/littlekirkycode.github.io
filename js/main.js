@@ -267,19 +267,29 @@
         for (var i = 0; i < data.screenshots; i++) {
             var phone = document.createElement('div');
             if (data.galleryImages && data.galleryImages[i]) {
-                phone.innerHTML = '<div class="phone-mockup__frame">' +
-                    '<div class="phone-mockup__notch"></div>' +
-                    '<div class="phone-mockup__screen">' +
-                    '<img src="' + data.galleryImages[i] + '" alt="' + data.title + ' screenshot ' + (i + 1) + '">' +
-                    '</div></div>';
+                phone.innerHTML = '<div class="device device-iphone-14-pro">' +
+                    '<div class="device-frame">' +
+                    '<img class="device-screen" src="' + data.galleryImages[i] + '" alt="' + data.title + ' screenshot ' + (i + 1) + '">' +
+                    '</div>' +
+                    '<div class="device-stripe"></div>' +
+                    '<div class="device-header"></div>' +
+                    '<div class="device-sensors"></div>' +
+                    '<div class="device-btns"></div>' +
+                    '<div class="device-power"></div>' +
+                    '</div>';
             } else {
-                phone.innerHTML = '<div class="phone-mockup__frame">' +
-                    '<div class="phone-mockup__notch"></div>' +
-                    '<div class="phone-mockup__screen">' +
-                    '<div class="phone-mockup__placeholder">' +
+                phone.innerHTML = '<div class="device device-iphone-14-pro">' +
+                    '<div class="device-frame">' +
+                    '<div class="device-screen phone-mockup__placeholder">' +
                     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
                     '<span>Screen ' + (i + 1) + '</span>' +
-                    '</div></div></div>';
+                    '</div></div>' +
+                    '<div class="device-stripe"></div>' +
+                    '<div class="device-header"></div>' +
+                    '<div class="device-sensors"></div>' +
+                    '<div class="device-btns"></div>' +
+                    '<div class="device-power"></div>' +
+                    '</div>';
             }
             modalPhones.appendChild(phone);
         }
