@@ -513,7 +513,7 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 45%;
 }
 
 .about__photo-placeholder {
@@ -761,12 +761,16 @@ img {
 .phone-mockup {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    height: 430px;
+    overflow: hidden;
 }
 
 .phone-mockup .device {
     transform: scale(0.55);
     transform-origin: top center;
-    margin-bottom: -200px;
+    flex-shrink: 0;
+    transition: filter var(--duration) var(--ease);
 }
 
 .project-card:hover .device {
@@ -1442,9 +1446,12 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .phone-mockup {
+        height: 350px;
+    }
+
     .phone-mockup .device {
         transform: scale(0.45);
-        margin-bottom: -240px;
     }
 
     .blog__grid {
@@ -1486,13 +1493,24 @@ img {
         gap: var(--space-md);
     }
 
+    .phone-mockup {
+        height: 380px;
+    }
+
+    .phone-mockup .device {
+        transform: scale(0.48);
+    }
+
     .modal__body {
         grid-template-columns: 1fr;
     }
 
+    .modal__phone-row {
+        height: 220px;
+    }
+
     .modal__phone-row .device {
         transform: scale(0.22);
-        margin-bottom: -380px;
     }
 }
 
@@ -1661,10 +1679,16 @@ img {
     justify-content: center;
 }
 
+.modal__phone-row {
+    overflow: hidden;
+    height: 280px;
+    align-items: flex-start;
+}
+
 .modal__phone-row .device {
     transform: scale(0.3);
     transform-origin: top center;
-    margin-bottom: -340px;
+    flex-shrink: 0;
 }
 
 .modal__phone-row .device-screen {
@@ -1867,8 +1891,11 @@ img {
         scroll-snap-align: center;
     }
 
+    .modal__phone-row {
+        height: 240px;
+    }
+
     .modal__phone-row .device {
         transform: scale(0.26);
-        margin-bottom: -360px;
     }
 }
