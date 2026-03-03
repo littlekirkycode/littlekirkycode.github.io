@@ -129,7 +129,13 @@
                 'Full analytics pipeline with PostHog',
                 'Solo-built: design, development, marketing, and operations'
             ],
-            screenshots: 6,
+            screenshots: 4,
+            galleryImages: [
+                'assets/images/projects/selfquest/gallery/screenshot-1.png',
+                'assets/images/projects/selfquest/gallery/screenshot-2.png',
+                'assets/images/projects/selfquest/gallery/screenshot-3.png',
+                'assets/images/projects/selfquest/gallery/screenshot-4.png'
+            ],
             links: [
                 { label: 'App Store', url: '#', icon: 'appstore' },
                 { label: 'Google Play', url: '#', icon: 'playstore' },
@@ -187,7 +193,39 @@
                 'Real-time sync with Supabase backend',
                 'Focus on habit-breaking through community support'
             ],
-            screenshots: 6,
+            screenshots: 5,
+            galleryImages: [
+                'assets/images/projects/selfgrow/gallery/screenshot-1.png',
+                'assets/images/projects/selfgrow/gallery/screenshot-2.png',
+                'assets/images/projects/selfgrow/gallery/screenshot-3.png',
+                'assets/images/projects/selfgrow/gallery/screenshot-4.png',
+                'assets/images/projects/selfgrow/gallery/screenshot-5.png'
+            ],
+            links: [
+                { label: 'App Store', url: '#', icon: 'appstore' }
+            ]
+        },
+        selfaware: {
+            title: 'SelfAware',
+            role: 'Founder & Developer',
+            desc: 'A mindfulness and self-awareness app designed for personal reflection and growth. Built natively in Swift with a Supabase backend.',
+            tags: ['Swift', 'Supabase', 'iOS'],
+            tagClasses: ['tag--swift', 'tag--supabase', 'tag--ios'],
+            socials: [],
+            highlights: [
+                'Native Swift for optimal iOS performance',
+                'Mindfulness and self-reflection tools',
+                'Supabase backend for data sync',
+                'Designed for personal growth'
+            ],
+            screenshots: 5,
+            galleryImages: [
+                'assets/images/projects/selfaware/gallery/screenshot-1.png',
+                'assets/images/projects/selfaware/gallery/screenshot-2.png',
+                'assets/images/projects/selfaware/gallery/screenshot-3.png',
+                'assets/images/projects/selfaware/gallery/screenshot-4.png',
+                'assets/images/projects/selfaware/gallery/screenshot-5.png'
+            ],
             links: [
                 { label: 'App Store', url: '#', icon: 'appstore' }
             ]
@@ -247,13 +285,21 @@
         modalPhones.innerHTML = '';
         for (var i = 0; i < data.screenshots; i++) {
             var phone = document.createElement('div');
-            phone.innerHTML = '<div class="phone-mockup__frame">' +
-                '<div class="phone-mockup__notch"></div>' +
-                '<div class="phone-mockup__screen">' +
-                '<div class="phone-mockup__placeholder">' +
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
-                '<span>Screen ' + (i + 1) + '</span>' +
-                '</div></div></div>';
+            if (data.galleryImages && data.galleryImages[i]) {
+                phone.innerHTML = '<div class="phone-mockup__frame">' +
+                    '<div class="phone-mockup__notch"></div>' +
+                    '<div class="phone-mockup__screen">' +
+                    '<img src="' + data.galleryImages[i] + '" alt="' + data.title + ' screenshot ' + (i + 1) + '">' +
+                    '</div></div>';
+            } else {
+                phone.innerHTML = '<div class="phone-mockup__frame">' +
+                    '<div class="phone-mockup__notch"></div>' +
+                    '<div class="phone-mockup__screen">' +
+                    '<div class="phone-mockup__placeholder">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
+                    '<span>Screen ' + (i + 1) + '</span>' +
+                    '</div></div></div>';
+            }
             modalPhones.appendChild(phone);
         }
 
