@@ -1436,11 +1436,12 @@ img {
 @media (max-width: 768px) {
     .nav__links {
         display: none;
-        position: fixed;
-        top: var(--nav-height);
+        position: absolute;
+        top: 100%;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
+        height: calc(100vh - var(--nav-height));
+        height: calc(100dvh - var(--nav-height));
         background: var(--bg);
         flex-direction: column;
         align-items: center;
@@ -1461,8 +1462,43 @@ img {
         display: flex;
     }
 
+    .hero {
+        min-height: calc(100vh - var(--nav-height));
+        min-height: calc(100dvh - var(--nav-height));
+        padding-top: var(--space-2xl);
+        padding-bottom: var(--space-2xl);
+    }
+
+    .hero__greeting {
+        font-size: var(--fs-md);
+    }
+
     .hero__name {
         font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .hero__title {
+        font-size: var(--fs-lg);
+        margin-bottom: var(--space-md);
+    }
+
+    .hero__tagline {
+        font-size: var(--fs-sm);
+        margin-bottom: var(--space-xl);
+        padding: 0 var(--space-md);
+    }
+
+    .hero__stats {
+        gap: var(--space-xl);
+        margin-bottom: var(--space-xl);
+    }
+
+    .hero__stat-number {
+        font-size: var(--fs-xl);
+    }
+
+    .hero__scroll-indicator {
+        display: none;
     }
 
     .projects__grid--web {
@@ -1502,14 +1538,26 @@ img {
         gap: var(--space-lg);
     }
 
+    .hero__name {
+        font-size: clamp(1.75rem, 10vw, 2.5rem);
+    }
+
     .hero__cta {
         flex-direction: column;
         align-items: center;
     }
 
     .hero__stats {
-        flex-direction: column;
-        gap: var(--space-md);
+        flex-direction: row;
+        gap: var(--space-lg);
+    }
+
+    .hero__stat-number {
+        font-size: var(--fs-lg);
+    }
+
+    .hero__stat-label {
+        font-size: 0.65rem;
     }
 
     .phone-mockup {
