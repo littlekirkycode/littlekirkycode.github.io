@@ -28,37 +28,43 @@
     });
 
     // ---------- MOBILE NAV ----------
-    const nav = document.getElementById('nav');
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const navBackdrop = document.getElementById('navBackdrop');
+    var nav = document.getElementById('nav');
+    var hamburger = document.getElementById('hamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navBackdrop = document.getElementById('navBackdrop');
 
     function closeMenu() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
-        nav.classList.remove('menu-open');
-        navBackdrop.classList.remove('open');
+        if (hamburger) hamburger.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('open');
+        if (nav) nav.classList.remove('menu-open');
+        if (navBackdrop) navBackdrop.classList.remove('open');
         document.body.style.overflow = '';
     }
 
-    hamburger.addEventListener('click', function () {
-        var isOpen = navLinks.classList.contains('open');
-        if (isOpen) {
-            closeMenu();
-        } else {
-            hamburger.classList.add('active');
-            navLinks.classList.add('open');
-            nav.classList.add('menu-open');
-            navBackdrop.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-    });
+    if (hamburger) {
+        hamburger.addEventListener('click', function () {
+            var isOpen = navLinks && navLinks.classList.contains('open');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                hamburger.classList.add('active');
+                if (navLinks) navLinks.classList.add('open');
+                if (nav) nav.classList.add('menu-open');
+                if (navBackdrop) navBackdrop.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
 
-    navBackdrop.addEventListener('click', closeMenu);
+    if (navBackdrop) {
+        navBackdrop.addEventListener('click', closeMenu);
+    }
 
-    navLinks.querySelectorAll('.nav__link').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
-    });
+    if (navLinks) {
+        navLinks.querySelectorAll('.nav__link').forEach(function (link) {
+            link.addEventListener('click', closeMenu);
+        });
+    }
 
     // ---------- SCROLL REVEAL ----------
     var reveals = document.querySelectorAll('.reveal');
