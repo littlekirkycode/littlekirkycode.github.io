@@ -28,21 +28,36 @@
     });
 
     // ---------- MOBILE NAV ----------
+    const nav = document.getElementById('nav');
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
+    const navBackdrop = document.getElementById('navBackdrop');
+
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        nav.classList.remove('menu-open');
+        navBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    }
 
     hamburger.addEventListener('click', function () {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('open');
-        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        var isOpen = navLinks.classList.contains('open');
+        if (isOpen) {
+            closeMenu();
+        } else {
+            hamburger.classList.add('active');
+            navLinks.classList.add('open');
+            nav.classList.add('menu-open');
+            navBackdrop.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
     });
 
+    navBackdrop.addEventListener('click', closeMenu);
+
     navLinks.querySelectorAll('.nav__link').forEach(function (link) {
-        link.addEventListener('click', function () {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
     });
 
     // ---------- SCROLL REVEAL ----------
