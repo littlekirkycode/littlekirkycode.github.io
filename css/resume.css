@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   font-family: Arial, sans-serif;
   color: #252620;
   background: #f4f2eb;
@@ -17,7 +17,7 @@ a {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid #b7472d;
+  outline: 3px solid #2563eb;
   outline-offset: 4px;
 }
 .toolbar {
@@ -57,7 +57,7 @@ h1 {
   margin: 10px 0 16px;
 }
 h1 span {
-  color: #b7472d;
+  color: #2563eb;
 }
 .eyebrow {
   font-size: 10px;
@@ -86,7 +86,7 @@ h2 {
   border-bottom: 1px solid #d6d5cb;
   padding-bottom: 9px;
   margin-bottom: 16px;
-  color: #9e3e27;
+  color: #2563eb;
 }
 article {
   margin-bottom: 19px;

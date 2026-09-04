@@ -1,555 +1,804 @@
-﻿<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f2eb" />
-    <title>James Kirkham — Software Engineer & Founder</title>
-    <meta
-      name="description"
-      content="James Kirkham is a software engineer and the founder of SelfQuest. Building thoughtful software across mobile, web, AI and cloud infrastructure. Currently at Allied."
-    />
-    <link rel="canonical" href="https://littlekirkycode.github.io/" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="James Kirkham — Engineer. Founder. Builder."
-    />
-    <meta
-      property="og:description"
-      content="From the first idea to 1.3M+ downloads. Software engineering, selected projects and the story so far."
-    />
-    <meta property="og:url" content="https://littlekirkycode.github.io/" />
-    <meta
-      property="og:image"
-      content="https://littlekirkycode.github.io/assets/images/og.png"
-    />
-    <meta
-      property="og:image:alt"
-      content="James Kirkham. Engineer. Founder. Builder."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="James Kirkham — Engineer. Founder. Builder."
-    />
-    <meta
-      name="twitter:description"
-      content="Software engineering, selected projects and the story so far."
-    />
-    <meta
-      name="twitter:image"
-      content="https://littlekirkycode.github.io/assets/images/og.png"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&amp;family=DM+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/styles.css?v=20260905" />
-    <script src="js/main.js?v=20260905" defer></script>
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Kirkham — Founder & Full-Stack Engineer</title>
+    <meta name="description" content="Founder and full-stack engineer with a track record of building and scaling consumer apps to 1M+ users. Flutter, Swift, React Native, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/devices.min.css">
+    <link rel="stylesheet" href="css/styles.css?v=original-ux-2">
+    <link rel="stylesheet" href="css/enhancements.css?v=original-ux-2">
+    <script src="js/theme.js?v=original-ux-2"></script>
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="canonical" href="https://littlekirkycode.github.io/">
+    <meta property="og:title" content="James Kirkham — Founder & Full-Stack Engineer">
+    <meta property="og:description" content="SelfQuest, SelfAware, SelfGrow and my engineering experience at Allied, Siemens and Nuremi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://littlekirkycode.github.io/">
+</head>
+<body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="wordmark" href="#top" aria-label="James Kirkham, home"
-          >jk<span>.</span></a
-        >
-        <nav class="navigation" aria-label="Main navigation">
-          <a href="#work">Work</a><a href="#experience">Experience</a
-          ><a href="#about">About</a>
-        </nav>
-        <a class="header-contact" href="#contact"
-          >Let’s talk <span aria-hidden="true">↗</span></a
-        >
-      </div>
-    </header>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav" id="nav" aria-label="Main navigation">
+        <div class="nav__container">
+            <a href="#hero" class="nav__logo">JK<span class="accent">.</span></a>
+            <ul class="nav__links" id="navLinks">
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#skills" class="nav__link">Skills</a></li>
+                <li><a href="#projects" class="nav__link">Projects</a></li>
+                <li><a href="#experience" class="nav__link">Experience</a></li>
+                <li><a href="#blog" class="nav__link">Blog</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <div class="nav__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="nav__hamburger" id="hamburger" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="nav__backdrop" id="navBackdrop"></div>
+
     <main id="main">
-      <section class="hero container" id="top" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">
-            <span class="little-square" aria-hidden="true"></span> James Kirkham
-            · Software engineer & founder
-          </p>
-          <h1 id="hero-title">From an idea.<br />To <em>real impact.</em></h1>
-          <p class="hero-description">
-            I build software people actually use. From consumer apps with over a
-            million downloads to engineering at Allied, I care about the details
-            that make a product work.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-dark" href="#work"
-              >Explore my work <span aria-hidden="true">↘</span></a
-            ><a class="text-link" href="cv.html"
-              >View résumé <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="current-role">
-            <span class="status-dot" aria-hidden="true"></span> Currently
-            building at <a href="#experience">Allied</a>
-          </div>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+        <div class="hero__bg">
+            <div class="hero__orb hero__orb--1"></div>
+            <div class="hero__orb hero__orb--2"></div>
+            <div class="hero__orb hero__orb--3"></div>
         </div>
-        <a
-          class="hero-art"
-          href="#selfquest"
-          aria-label="Explore SelfQuest, built by James Kirkham"
-        >
-          <span class="art-label mono">FROM ZERO TO SOMETHING REAL</span>
-          <div class="orbit orbit-one" aria-hidden="true"></div>
-          <div class="orbit orbit-two" aria-hidden="true"></div>
-          <div class="orbit orbit-three" aria-hidden="true"></div>
-          <span class="art-plus" aria-hidden="true">+</span>
-          <div class="hero-phone">
-            <img
-              src="assets/images/projects/selfquest/main.webp"
-              alt="SelfQuest’s RPG character and fitness progression screen"
-              width="942"
-              height="2048"
-              fetchpriority="high"
-            />
-          </div>
-          <div class="art-note">
-            <span class="note-star" aria-hidden="true">✳</span
-            ><span>One idea.<br />A million possibilities.</span>
-          </div>
-          <div class="art-footer">
-            <span
-              ><strong>SelfQuest</strong
-              ><small>Solo-founded. Built end to end.</small></span
-            ><span class="round-arrow" aria-hidden="true">↗</span>
-          </div>
+        <div class="container hero__content">
+            <p class="hero__greeting reveal">Hi, I'm</p>
+            <h1 class="hero__name reveal">James Kirkham<span class="accent">.</span></h1>
+            <p class="hero__title reveal">Founder & Full-Stack Engineer</p>
+            <a class="hero__current" href="#experience">Currently engineering at <strong>Allied</strong><span aria-hidden="true"> →</span></a>
+            <p class="hero__tagline reveal">I build and scale consumer apps from zero to millions of users. SelfQuest has reached 1.3M+ downloads and 100K daily active users — solo-founded and solo-built.</p>
+            <div class="hero__stats reveal">
+                <div class="hero__stat">
+                    <span class="hero__stat-number">1.3M+</span>
+                    <span class="hero__stat-label">Downloads</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number">100K</span>
+                    <span class="hero__stat-label">Daily Users</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number">72K</span>
+                    <span class="hero__stat-label">TikTok Followers</span>
+                </div>
+            </div>
+            <div class="hero__cta reveal">
+                <a href="#projects" class="btn btn--primary">View Projects</a>
+                <a href="#contact" class="btn btn--outline">Get In Touch</a>
+                <a href="cv.html" class="btn btn--outline">View CV</a>
+            </div>
+        </div>
+        <a href="#about" class="hero__scroll-indicator" aria-label="Scroll to about me">
+            <span>Scroll</span>
+            <div class="hero__scroll-line"></div>
         </a>
-      </section>
-      <div class="container proof-strip" aria-label="SelfQuest milestones">
-        <p class="proof-intro">
-          Small beginnings.<br /><span>Meaningful milestones.</span>
-        </p>
-        <div>
-          <strong>1.3M<span>+</span></strong
-          ><span>SelfQuest downloads</span>
-        </div>
-        <div><strong>100K</strong><span>Daily users reached</span></div>
-        <div>
-          <strong>0 → 1</strong><span>Idea to product, end to end</span>
-        </div>
-      </div>
-      <section class="section container" id="work" aria-labelledby="work-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">01 / Selected work</p>
-            <h2 id="work-title">Built with <em>purpose.</em></h2>
-          </div>
-          <p>
-            A few things I’ve taken from<br />“what if” to working software.
-          </p>
-        </div>
-        <article class="project project-featured" id="selfquest">
-          <div class="project-visual quest-visual">
-            <span class="visual-label mono"
-              >SELFQUEST / FITNESS, REIMAGINED</span
-            >
-            <div class="quest-ring" aria-hidden="true"></div>
-            <img
-              class="project-phone phone-back"
-              src="assets/images/projects/selfquest/gallery/screenshot-1.webp"
-              width="942"
-              height="2048"
-              alt="SelfQuest app interface"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              class="project-phone phone-front"
-              src="assets/images/projects/selfquest/main.webp"
-              width="942"
-              height="2048"
-              alt="The SelfQuest character customisation screen"
-              loading="lazy"
-              decoding="async"
-            />
-            <span class="visual-bottom mono"
-              >REAL-LIFE EFFORT. IN-GAME PROGRESS.</span
-            >
-          </div>
-          <div class="project-copy">
-            <p class="eyebrow">01 / Founder & lead engineer</p>
-            <h3>SelfQuest<span class="accent">.</span></h3>
-            <p class="project-lead">
-              Making self-improvement<br />feel like an adventure.
-            </p>
-            <p>
-              A fitness app that turns real-world effort into RPG progression. I
-              built and grew the product from scratch, owning everything from
-              the mobile experience to the backend and community.
-            </p>
-            <div class="project-result">
-              <strong>1.3M+</strong><span>downloads across iOS & Android</span>
-            </div>
-            <ul class="tags" aria-label="SelfQuest technologies">
-              <li>Flutter / Dart</li>
-              <li>C# / .NET</li>
-              <li>Azure</li>
-              <li>SQL</li>
-              <li>PostHog</li>
-            </ul>
-            <details class="project-details">
-              <summary>
-                Inside the build <span aria-hidden="true">+</span>
-              </summary>
-              <div>
-                <p>
-                  A shared Flutter codebase backed by ASP.NET Core on Azure.
-                  Features include real-time multiplayer with SignalR, social
-                  groups, subscriptions with RevenueCat, and analytics to guide
-                  product decisions.
-                </p>
-                <p>
-                  My role spans product design, development, deployment and
-                  community-led growth.
-                </p>
-              </div>
-            </details>
-            <a
-              class="text-link"
-              href="https://selfquest.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit SelfQuest <span aria-hidden="true">↗</span></a
-            >
-          </div>
-        </article>
-        <div class="project-grid">
-          <article class="project-small" id="selfaware">
-            <div class="small-visual aware-visual">
-              <span class="visual-label mono">AI, WITH A HUMAN PURPOSE</span
-              ><span class="aware-word" aria-hidden="true">What’s next?</span
-              ><img
-                class="small-phone"
-                src="assets/images/projects/selfaware/main.webp"
-                width="942"
-                height="2048"
-                alt="SelfAware daily dashboard with an AI afternoon brief"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div class="small-project-heading">
-              <h3>SelfAware</h3>
-              <span class="mono project-type">Personal product</span>
-            </div>
-            <p>
-              An AI-first personal assistant that connects conversation, context
-              and the things you need to get done.
-            </p>
-            <ul class="tags" aria-label="SelfAware technologies">
-              <li>React Native</li>
-              <li>TypeScript</li>
-              <li>OpenAI</li>
-              <li>Supabase</li>
-            </ul>
-            <details class="project-details">
-              <summary>
-                Explore the engineering <span aria-hidden="true">+</span>
-              </summary>
-              <div>
-                <p>
-                  Built with Expo and TypeScript. Combines streaming
-                  conversations, retrieval with pgvector, multimodal input and
-                  custom MCP tools for external integrations.
-                </p>
-                <a
-                  class="text-link"
-                  href="assets/images/projects/selfaware/gallery/screenshot-2.png"
-                  target="_blank"
-                  rel="noopener"
-                  >View an app screen <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </details>
-          </article>
-          <article class="project-small" id="selfgrow">
-            <div class="small-visual grow-visual">
-              <span class="visual-label mono">BETTER HABITS. TOGETHER.</span>
-              <div class="grow-orbit" aria-hidden="true"></div>
-              <img
-                class="small-phone"
-                src="assets/images/projects/selfgrow/main.webp"
-                width="942"
-                height="2048"
-                alt="SelfGrow habit tracking app"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div class="small-project-heading">
-              <h3>SelfGrow</h3>
-              <span class="mono project-type">Personal product</span>
-            </div>
-            <p>
-              A native iOS app that makes breaking habits a shared journey, with
-              social accountability at its heart.
-            </p>
-            <ul class="tags" aria-label="SelfGrow technologies">
-              <li>SwiftUI</li>
-              <li>Supabase</li>
-              <li>WidgetKit</li>
-              <li>RevenueCat</li>
-            </ul>
-            <details class="project-details">
-              <summary>
-                Explore the engineering <span aria-hidden="true">+</span>
-              </summary>
-              <div>
-                <p>
-                  An offline-first experience with a sync queue and
-                  local-to-cloud migration. Supabase Realtime supports social
-                  accountability, with home screen widgets and Sign in with
-                  Apple.
-                </p>
-                <a
-                  class="text-link"
-                  href="assets/images/projects/selfgrow/gallery/screenshot-1.png"
-                  target="_blank"
-                  rel="noopener"
-                  >View an app screen <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </details>
-          </article>
-        </div>
-        <div class="more-work">
-          <span class="mono">ALSO ON THE WORKBENCH</span
-          ><a
-            href="https://xuabelle.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Xuabelle <span>Jewellery website concept</span> ↗</a
-          ><a
-            href="https://github.com/littlekirkycode"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GitHub <span>More code & experiments</span> ↗</a
-          >
-        </div>
-      </section>
-      <section
-        class="experience-section"
-        id="experience"
-        aria-labelledby="experience-title"
-      >
-        <div class="container experience-layout">
-          <div class="experience-intro">
-            <p class="eyebrow">02 / The journey</p>
-            <h2 id="experience-title">
-              Always building.<br />Always <em>learning.</em>
-            </h2>
-            <p>
-              From engineering teams to founding my own products. A career
-              shaped by curiosity and getting things shipped.
-            </p>
-            <a class="text-link" href="cv.html"
-              >View full résumé <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="career-list">
-            <article class="career-item allied-item">
-              <div class="career-meta">
-                <span class="mono">CURRENT</span
-                ><span class="current-badge">Now</span>
-              </div>
-              <h3>Allied</h3>
-              <p class="career-role">Software engineering</p>
-              <p>
-                Contributing across modern web applications, AI tooling, data
-                workflows and infrastructure in the defence sector.
-              </p>
-              <ul
-                class="tags"
-                aria-label="Technologies used in recent Allied contributions"
-              >
-                <li>TypeScript</li>
-                <li>React</li>
-                <li>Next.js</li>
-                <li>TanStack</li>
-                <li>Python</li>
-                <li>PostgreSQL</li>
-                <li>Temporal</li>
-                <li>Terraform</li>
-              </ul>
-              <p class="discretion-note">
-                Selected technologies only. Project details remain confidential.
-              </p>
-            </article>
-            <article class="career-item">
-              <div class="career-meta mono">MAR 2024 — PRESENT</div>
-              <h3>Self Platform</h3>
-              <p class="career-role">Founder & lead engineer</p>
-              <p>
-                Building SelfQuest, SelfAware and SelfGrow. Taking products from
-                concept through design, engineering, launch and growth across
-                Flutter, React Native and SwiftUI.
-              </p>
-            </article>
-            <article class="career-item">
-              <div class="career-meta mono">NOV 2025 — FEB 2026</div>
-              <h3>Nuremi</h3>
-              <p class="career-role">
-                Lead software engineer & technical consultant
-              </p>
-              <p>
-                Led the architecture, UX and implementation of an AI concierge
-                and interactive map app. Built with React Native, Supabase,
-                Claude and retrieval using pgvector.
-              </p>
-            </article>
-            <article class="career-item">
-              <div class="career-meta mono">OCT 2022 — OCT 2024</div>
-              <h3>Siemens</h3>
-              <p class="career-role">Full stack software engineer</p>
-              <p>
-                Developed manufacturing applications with C#, Blazor, .NET and
-                SQL Server. Built interfaces, REST APIs and backend services in
-                an Agile team using Azure DevOps.
-              </p>
-            </article>
-            <article class="career-item">
-              <div class="career-meta mono">AUG 2021 — SEP 2022</div>
-              <h3>J2 Innovations</h3>
-              <p class="career-role">Apprentice support engineer</p>
-              <p>
-                Supported the FIN Stack building management system, managing
-                engineering issues and helping users resolve problems.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section
-        class="section container capabilities"
-        id="skills"
-        aria-labelledby="skills-title"
-      >
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">03 / The toolkit</p>
-            <h2 id="skills-title">Across the <em>whole stack.</em></h2>
-          </div>
-          <p>
-            The right tools for the problem.<br />From the interface to the
-            infrastructure.
-          </p>
-        </div>
-        <div class="capability-row">
-          <span class="mono capability-number">01</span>
-          <h3>Web & interfaces</h3>
-          <p>TypeScript · React · Next.js · TanStack · Tailwind CSS · Blazor</p>
-        </div>
-        <div class="capability-row">
-          <span class="mono capability-number">02</span>
-          <h3>Mobile experiences</h3>
-          <p>Flutter · Dart · React Native · Expo · SwiftUI · WidgetKit</p>
-        </div>
-        <div class="capability-row">
-          <span class="mono capability-number">03</span>
-          <h3>AI & automation</h3>
-          <p>OpenAI · Claude · MCP · RAG · pgvector · Temporal</p>
-        </div>
-        <div class="capability-row">
-          <span class="mono capability-number">04</span>
-          <h3>Backend & infrastructure</h3>
-          <p>
-            C# · .NET · Python · PostgreSQL · Supabase · Azure · Docker ·
-            Terraform
-          </p>
-        </div>
-      </section>
-      <section
-        class="about-section container"
-        id="about"
-        aria-labelledby="about-title"
-      >
-        <div class="about-mark" aria-hidden="true">
-          <span>j</span><span>k</span><i>✳</i
-          ><small class="mono">CURIOUS BY DEFAULT.</small>
-        </div>
-        <div class="about-copy">
-          <p class="eyebrow">04 / A little about me</p>
-          <h2 id="about-title">
-            An engineer’s mind.<br />A founder’s <em>instinct.</em>
-          </h2>
-          <p>
-            I’m James. I like turning an idea into something useful, then
-            staying close to it as it grows. That means caring as much about how
-            a screen feels as how the system behind it behaves.
-          </p>
-          <p>
-            Building my own apps has taught me to think beyond the code: listen
-            to users, make decisions, and keep improving. Working in engineering
-            teams brings that same curiosity to a different scale.
-          </p>
-          <div class="education">
-            <div>
-              <span class="mono">2024 — 2025</span
-              ><strong>Founders University</strong>
-              <p>Selected for the 12-week founder accelerator.</p>
-            </div>
-            <div>
-              <span class="mono">2022 — 2024</span
-              ><strong>Ada College of Technology</strong>
-              <p>
-                Two years of a computer engineering apprenticeship / degree.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        class="contact-section"
-        id="contact"
-        aria-labelledby="contact-title"
-      >
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
         <div class="container">
-          <div class="contact-top">
-            <p class="eyebrow">05 / Start a conversation</p>
-            <p>Interesting problems. Thoughtful people. Good software.</p>
-          </div>
-          <a class="contact-title-link" href="mailto:james.kirkham00@gmail.com"
-            ><h2 id="contact-title">
-              Let’s build<br /><em>something good.</em>
-            </h2>
-            <span aria-hidden="true">↗</span></a
-          >
-          <div class="contact-bottom">
-            <a class="email-link" href="mailto:james.kirkham00@gmail.com"
-              >james.kirkham00@gmail.com</a
-            ><button class="copy-email" type="button" hidden>
-              Copy email <span aria-hidden="true">↗</span></button
-            ><span class="copy-status" role="status" aria-live="polite"></span>
-            <div class="social-links">
-              <a
-                href="https://github.com/littlekirkycode"
-                target="_blank"
-                rel="noopener noreferrer"
-                >GitHub ↗</a
-              ><a
-                href="https://www.linkedin.com/in/james-kirkham-a965831b9/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >LinkedIn ↗</a
-              >
+            <h2 class="section__title reveal">About Me</h2>
+            <div class="about__grid">
+                <div class="about__image reveal">
+                    <div class="about__photo-frame">
+                        <img src="assets/images/profile/photo.png" loading="lazy" decoding="async" alt="James Kirkham" class="about__photo">
+                    </div>
+                </div>
+                <div class="about__text reveal">
+                    <p>Founder and full-stack engineer with a track record of building and scaling consumer apps to 1M+ users. I take products from idea to App Store — handling everything from UX design to cloud infrastructure.</p>
+                    <p>Skilled in Flutter, Swift, React Native, C#, SQL, Supabase, and Azure. Experienced in product development, backend systems, and community-driven growth. Selected for Founders University accelerator and offered $25K investment by Jason Calacanis (declined).</p>
+                    <div class="about__stats">
+                        <div class="about__stat">
+                            <span class="about__stat-number">6</span>
+                            <span class="about__stat-label">Products Built</span>
+                        </div>
+                        <div class="about__stat">
+                            <span class="about__stat-number">5+</span>
+                            <span class="about__stat-label">Years Experience</span>
+                        </div>
+                        <div class="about__stat">
+                            <span class="about__stat-number">3</span>
+                            <span class="about__stat-label">Frameworks</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section__title reveal">Skills & Technologies</h2>
+            <div class="skills__categories">
+                <div class="skills__category reveal">
+                    <h3 class="skills__category-title">Mobile</h3>
+                    <div class="skills__grid">
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Flutter</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Swift</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" fill="currentColor"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+                            <span class="skill-card__name">React Native</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M4.105 4.105S9.158 1.58 11.684.316a3.079 3.079 0 011.481-.315c.766.047 1.677.788 1.677.788L24 9.948v9.789h-4.263V24H.015l8.79-8.79L4.105 4.105z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Dart</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M2.958 12.251c.007.15.047.306.122.453l4.185 8.194a.749.749 0 001.341-.009l1.942-3.904L6.475 9.09l-3.395 2.644a.753.753 0 00-.122.517zm19.8-1.039L18.142 3.49a.753.753 0 00-1.312-.058L14.574 7.76l4.315 7.891 3.755-3.724a.753.753 0 00.114-.715zM14.574 7.76L10.548 16.985l6.095-5.95-2.069-3.275zM10.548 16.985l-4.073-7.895 4.073 7.895z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Kotlin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills__category reveal">
+                    <h3 class="skills__category-title">Backend & Data</h3>
+                    <div class="skills__grid">
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">C#</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M24 8.77h-2.468v7.565h-1.425V8.77h-2.462V7.53H24zm-6.852 7.565h-4.821V7.53h4.63v1.24h-3.205v2.494h2.953v1.234h-2.953v2.604h3.396zm-6.708 0H8.882L4.78 9.863a2.896 2.896 0 01-.258-.51h-.036c.032.189.048.592.048 1.21v5.772H3.157V7.53h1.659l3.965 6.32c.167.261.275.442.323.54h.024a5.087 5.087 0 01-.048-1.066V7.53H10.44zm-7.32-1.23a.86.86 0 00.615-.24.823.823 0 00.254-.612.832.832 0 00-.254-.618.854.854 0 00-.615-.243.867.867 0 00-.624.243.834.834 0 00-.254.618c0 .236.085.44.254.613a.87.87 0 00.624.24z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">.NET / Blazor</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zM6 17V9.27C7.53 10.03 9.61 10.5 12 10.5s4.47-.47 6-1.23V17c0 .5-2.13 2-6 2s-6-1.5-6-2z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">SQL</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M21 5c0-1.1-1.8-2-4.5-2C13.8 3 12 3.9 12 5v2c0 1.1 1.8 2 4.5 2S21 8.1 21 7V5zM12 5c0-1.1-1.8-2-4.5-2S3 3.9 3 5v14c0 1.1 1.8 2 4.5 2s4.5-.9 4.5-2v-3.5" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="skill-card__name">Supabase</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M22.379 23.343a1.62 1.62 0 01-1.535-1.1l-1.907-5.685H5.063l-1.907 5.684A1.62 1.62 0 010 22.876V1.124A1.125 1.125 0 011.125 0h21.75A1.125 1.125 0 0124 1.124v21.095a1.622 1.622 0 01-1.621 1.124zM12 5.188L6.937 20.25h10.127L12 5.188z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Azure</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">RESTful APIs</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">JWT Auth</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M9.585 11.692h4.328s2.432.039 2.432-2.35V5.391S16.714 3 11.759 3C6.803 3 7.043 5.016 7.043 5.016l.006 2.086h4.81v.627H5.343S2.789 7.47 2.789 12.24s2.218 4.604 2.218 4.604h1.324v-2.217s-.071-2.218 2.182-2.218zm-.38-5.878a.773.773 0 110-1.546.773.773 0 010 1.546zM14.415 12.308h-4.328s-2.432-.039-2.432 2.35v3.951S7.286 21 12.241 21c4.956 0 4.716-2.016 4.716-2.016l-.006-2.086h-4.81v-.627h6.516S21.211 16.53 21.211 11.76s-2.218-4.604-2.218-4.604h-1.324v2.217s.071 2.218-2.182 2.218zm.38 5.878a.773.773 0 110 1.546.773.773 0 010-1.546z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Python</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65zM14.678 8.58h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Node.js</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.762.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.569 2.082-1.006 3.776-.891 3.776-.891M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0 0 .07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627M9.734 23.924c4.322.277 10.959-.154 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Java</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills__category reveal">
+                    <h3 class="skills__category-title">Web</h3>
+                    <div class="skills__grid">
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">React</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">JavaScript</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">HTML & CSS</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 011.306.34v2.458a3.95 3.95 0 00-.643-.361 5.093 5.093 0 00-.717-.26 5.453 5.453 0 00-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 00-.623.242c-.17.104-.3.229-.393.374a.888.888 0 00-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 01-1.012 1.085 4.38 4.38 0 01-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 01-1.84-.164 5.544 5.544 0 01-1.512-.493v-2.63a5.033 5.033 0 003.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 00-.074-1.089 2.12 2.12 0 00-.537-.5 5.597 5.597 0 00-.807-.444 27.72 27.72 0 00-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 011.47-.629 7.536 7.536 0 011.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">TypeScript</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 01-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 00-2.119 5.243c-.096.66-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158a121.4 121.4 0 01-1.173-1.577l-.03-.04-2.384-3.769a156 156 0 00-2.405-3.768c-.012-.003-.024 1.672-.036 3.716-.018 3.453-.024 3.726-.072 3.823a.453.453 0 01-.219.218c-.08.04-.149.047-.534.047h-.438l-.115-.066a.468.468 0 01-.164-.175l-.053-.113.006-4.975.007-4.975.078-.091a.637.637 0 01.17-.134c.096-.047.134-.052.57-.052.486 0 .526.009.649.09a.72.72 0 01.153.136c.024.024 1.309 2.068 2.857 4.541 1.548 2.473 3.555 5.672 4.46 7.11l1.645 2.614.08-.05a12.2 12.2 0 002.591-2.379c1.548-1.86 2.576-4.107 2.942-6.45.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.86-8.292-8.209-9.695a12.597 12.597 0 00-2.498-.523A21.386 21.386 0 0011.572 0z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Next.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills__category reveal">
+                    <h3 class="skills__category-title">Tools & Platforms</h3>
+                    <div class="skills__grid">
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Git & GitHub</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Xcode</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M0 8.877L2.247 5.91l8.405-3.416V.022l7.37 5.393L2.966 8.338v8.225L0 15.707zm24-4.45v14.651l-5.753 4.9-9.303-3.057v3.056l-5.978-7.416 15.057 1.798V5.418z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Azure DevOps</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M9.854 14.5 5 9.647.854 5.5A.5.5 0 0 0 0 5.854V8.44a.5.5 0 0 0 .146.353L5 13.647l.147.146L9.854 18.5l.146.147v-.049c.065.03.134.049.207.049h2.586a.5.5 0 0 0 .353-.854L9.854 14.5zm0-5-4-4a.487.487 0 0 0-.409-.144.515.515 0 0 0-.356.21.493.493 0 0 0-.089.288V8.44a.5.5 0 0 0 .147.353l9 9a.5.5 0 0 0 .853-.354v-2.585a.5.5 0 0 0-.146-.354l-5-5zm1-4a.5.5 0 0 0-.854.354V8.44a.5.5 0 0 0 .147.353l4 4a.5.5 0 0 0 .853-.354V9.854a.5.5 0 0 0-.146-.354l-4-4zm12.647 11.515a3.863 3.863 0 0 1-2.232-1.1l-4.708-4.707a.5.5 0 0 0-.854.354v6.585a.5.5 0 0 0 .5.5H23.5a.5.5 0 0 0 .5-.5v-.6c0-.276-.225-.497-.499-.532zm-5.394.032a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zM.854 15.5a.5.5 0 0 0-.854.354v2.293a.5.5 0 0 0 .5.5h2.293c.222 0 .39-.135.462-.309a.493.493 0 0 0-.109-.545L.854 15.501zM5 14.647.854 10.5a.5.5 0 0 0-.854.353v2.586a.5.5 0 0 0 .146.353L4.854 18.5l.146.147h2.793a.5.5 0 0 0 .353-.854L5 14.647z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">PostHog</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M18.75 11.35a4.32 4.32 0 01-.79-.08 3.55 3.55 0 01-.73-.2l-.17-.09-.14-.09-.42-.28-.43-.28L12 7.69 7.93 10.33l-.43.28-.42.28-.14.09-.17.09a3.55 3.55 0 01-.73.2 4.32 4.32 0 01-.79.08 4.42 4.42 0 01-3.83-2.18A4.33 4.33 0 011 6.88a4.4 4.4 0 013.63-4.33 4.3 4.3 0 013.48.93L12 6.2l3.89-2.72a4.3 4.3 0 013.48-.93A4.4 4.4 0 0123 6.88a4.33 4.33 0 01-.42 2.19 4.42 4.42 0 01-3.83 2.28zM12 21.8L3.93 15.64a3.89 3.89 0 01-.68-.73 3.78 3.78 0 01-.49-.89 4.34 4.34 0 01-.33-1.63 4.38 4.38 0 01.55-2.13l.06-.09.14.09.17.09.42.28.43.28L12 14.77l7.8-3.86.43-.28.42-.28.17-.09.14-.09.06.09a4.38 4.38 0 01.55 2.13 4.34 4.34 0 01-.33 1.63 3.78 3.78 0 01-.49.89 3.89 3.89 0 01-.68.73z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">AWS</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M24 22.525H0l12-21.05 12 21.05z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Vercel</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M3.89 15.672L6.255.461A.542.542 0 017.27.288l2.543 4.771L3.89 15.672zm16.794 3.692l-2.25-14a.54.54 0 00-.919-.295L3.316 19.365l7.856 4.427a1.621 1.621 0 001.588 0l7.924-4.428zM14.3 7.147l-1.82-3.482a.542.542 0 00-.96 0L3.53 17.984 14.3 7.147z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Firebase</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Docker</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M10.204 14.35l.007.01-.999 2.413a5.171 5.171 0 0 1-2.075-2.597l2.578-.437.004.005a.44.44 0 0 1 .484.606zm-.833-2.129a.44.44 0 0 0 .173-.756l.002-.011L7.585 9.7a5.143 5.143 0 0 0-.73 3.255l2.514-.725.002-.009zm1.145-1.98a.44.44 0 0 0 .699-.337l.01-.005.15-2.62a5.144 5.144 0 0 0-3.01 1.442l2.147 1.523.004-.002zm.76 2.75l.723.349.722-.347.18-.78-.5-.623h-.804l-.5.623.179.779zm1.5-3.095a.44.44 0 0 0 .7.336l.008.003 2.134-1.513a5.188 5.188 0 0 0-2.992-1.442l.148 2.615.002.001zm10.876 5.97l-5.773 7.181a1.6 1.6 0 0 1-1.248.594l-9.261.003a1.6 1.6 0 0 1-1.247-.596l-5.776-7.18a1.583 1.583 0 0 1-.307-1.34L2.1 5.573c.108-.47.425-.864.863-1.073L11.305.513a1.606 1.606 0 0 1 1.385 0l8.345 3.985c.438.209.755.604.863 1.073l2.062 8.955c.108.47-.005.963-.308 1.34zm-3.289-2.057c-.042-.01-.103-.026-.145-.034-.174-.033-.315-.025-.479-.038-.35-.037-.638-.067-.895-.148-.105-.04-.18-.165-.216-.216l-.201-.059a6.45 6.45 0 0 0-.105-2.332 6.465 6.465 0 0 0-.936-2.163c.052-.047.15-.133.177-.159.008-.09.001-.183.094-.282.197-.185.444-.338.743-.522.142-.084.273-.137.415-.242.032-.024.076-.062.11-.089.24-.191.295-.52.123-.736-.172-.216-.506-.236-.745-.045-.034.027-.08.062-.111.088-.134.116-.217.23-.33.35-.246.25-.45.458-.673.609-.097.056-.239.037-.303.033l-.19.135a6.545 6.545 0 0 0-4.146-2.003l-.012-.223c-.065-.062-.143-.115-.163-.25-.022-.268.015-.557.057-.905.023-.163.061-.298.068-.475.001-.04-.001-.099-.001-.142 0-.306-.224-.555-.5-.555-.275 0-.499.249-.499.555l.001.014c0 .041-.002.092 0 .128.006.177.044.312.067.475.042.348.078.637.056.906a.545.545 0 0 1-.162.258l-.012.211a6.424 6.424 0 0 0-4.166 2.003 8.373 8.373 0 0 1-.18-.128c-.09.012-.18.04-.297-.029-.223-.15-.427-.358-.673-.608-.113-.12-.195-.234-.329-.349-.03-.026-.077-.062-.111-.088a.594.594 0 0 0-.348-.132.481.481 0 0 0-.398.176c-.172.216-.117.546.123.737l.007.005.104.083c.142.105.272.159.414.242.299.185.546.338.743.522.076.082.09.226.1.288l.16.143a6.462 6.462 0 0 0-1.02 4.506l-.208.06c-.055.072-.133.184-.215.217-.257.081-.546.11-.895.147-.164.014-.305.006-.48.039-.037.007-.09.02-.133.03l-.004.002-.007.002c-.295.071-.484.342-.423.608.061.267.349.429.645.365l.007-.001.01-.003.129-.029c.17-.046.294-.113.448-.172.33-.118.604-.217.87-.256.112-.009.23.069.288.101l.217-.037a6.5 6.5 0 0 0 2.88 3.596l-.09.218c.033.084.069.199.044.282-.097.252-.263.517-.452.813-.091.136-.185.242-.268.399-.02.037-.045.095-.064.134-.128.275-.034.591.213.71.248.12.556-.007.69-.282v-.002c.02-.039.046-.09.062-.127.07-.162.094-.301.144-.458.132-.332.205-.68.387-.897.05-.06.13-.082.215-.105l.113-.205a6.453 6.453 0 0 0 4.609.012l.106.192c.086.028.18.042.256.155.136.232.229.507.342.84.05.156.074.295.145.457.016.037.043.09.062.129.133.276.442.402.69.282.247-.118.341-.435.213-.71-.02-.039-.045-.096-.065-.134-.083-.156-.177-.261-.268-.398-.19-.296-.346-.541-.443-.793-.04-.13.007-.21.038-.294-.018-.022-.059-.144-.083-.202a6.499 6.499 0 0 0 2.88-3.622c.064.01.176.03.213.038.075-.05.144-.114.28-.104.266.039.54.138.87.256.154.06.277.128.448.173.036.01.088.019.13.028l.009.003.007.001c.297.064.584-.098.645-.365.06-.266-.128-.537-.423-.608zM16.4 9.701l-1.95 1.746v.005a.44.44 0 0 0 .173.757l.003.01 2.526.728a5.199 5.199 0 0 0-.108-1.674A5.208 5.208 0 0 0 16.4 9.7zm-4.013 5.325a.437.437 0 0 0-.404-.232.44.44 0 0 0-.372.233h-.002l-1.268 2.292a5.164 5.164 0 0 0 3.326.003l-1.27-2.296h-.01zm1.888-1.293a.44.44 0 0 0-.27.036.44.44 0 0 0-.214.572l-.003.004 1.01 2.438a5.15 5.15 0 0 0 2.081-2.615l-2.6-.44-.004.005z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Kubernetes</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M4 6h4v2H4V6zm0 4h4v2H4v-2zm0 4h4v2H4v-2zm12-8h4v2h-4V6zm0 4h4v2h-4v-2zm0 4h4v2h-4v-2zm-6-8h4v2h-4V6zm0 4h4v2h-4v-2zm0 4h4v2h-4v-2z" fill="currentColor"/><path d="M2 2h20v20H2V2zm2 2v16h16V4H4z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Microservices</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Stripe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills__category reveal">
+                    <h3 class="skills__category-title">AI & Automation</h3>
+                    <div class="skills__grid">
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1.27c.34-.6.99-1 1.73-1a2 2 0 110 4c-.74 0-1.39-.4-1.73-1H20v1a7 7 0 01-7 7v1.27c.6.34 1 .99 1 1.73a2 2 0 11-4 0c0-.74.4-1.39 1-1.73V20a7 7 0 01-7-7H2.73c-.34.6-.99 1-1.73 1a2 2 0 110-4c.74 0 1.39.4 1.73 1H4a7 7 0 017-7V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2m0 7a5 5 0 00-5 5 5 5 0 005 5 5 5 0 005-5 5 5 0 00-5-5m-1 2h2v3h3v2h-5z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">AI / LLMs</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" fill="none" stroke-width="1.5"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+                            <span class="skill-card__name">RAG</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 7h0m10 0h0M7 17h0m10 0h0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span class="skill-card__name">MCP</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/><path d="M9 8l6 4-6 4V8z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Prompt Engineering</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="skill-card__name">Vector DBs</span>
+                        </div>
+                        <div class="skill-card">
+                            <svg class="skill-card__icon" viewBox="0 0 24 24"><path d="M17.523 2H6.477A4.477 4.477 0 002 6.477v11.046A4.477 4.477 0 006.477 22h11.046A4.477 4.477 0 0022 17.523V6.477A4.477 4.477 0 0017.523 2zM8 17a1 1 0 11-2 0V7a1 1 0 112 0v10zm5 0a1 1 0 11-2 0v-6a1 1 0 112 0v6zm5 0a1 1 0 11-2 0V9a1 1 0 112 0v8z" fill="currentColor"/></svg>
+                            <span class="skill-card__name">Claude Code</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-stack reveal">
+                <h3>Recent web & platform work</h3>
+                <div class="experience__technologies"><span class="tag tag--web">React</span><span class="tag tag--web">Next.js</span><span class="tag tag--web">TanStack</span><span class="tag tag--web">Tailwind CSS</span><span class="tag tag--web">PostgreSQL</span><span class="tag tag--web">Temporal</span><span class="tag tag--web">Docker</span><span class="tag tag--web">Terraform</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section__title reveal">Featured Projects</h2>
+            <p class="section__subtitle reveal">Apps and websites I've built — from concept to launch. Browse the phone screens or open a project for the full gallery.</p>
+
+            <!-- Mobile Apps -->
+            <div class="projects__group">
+                <h3 class="projects__group-title reveal">Mobile Apps</h3>
+                <div class="projects__grid--apps" id="appGrid">
+
+                    <!-- SelfQuest -->
+                    <div class="project-card reveal" data-project="selfquest">
+                        <div class="phone-mockup">
+                            <div class="device device-iphone-14-pro">
+                                <div class="device-frame">
+                                    <img class="device-screen" src="assets/images/projects/selfquest/main.webp" loading="lazy" decoding="async" alt="SelfQuest screenshot">
+                                </div>
+                                <div class="device-stripe"></div>
+                                <div class="device-header"></div>
+                                <div class="device-sensors"></div>
+                                <div class="device-btns"></div>
+                                <div class="device-power"></div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">SelfQuest</h4>
+                            <p class="project-card__desc">Gamified fitness tracker — 1.3M+ downloads, 100K DAU.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--flutter">Flutter</span>
+                                <span class="tag tag--csharp">C#</span>
+                                <span class="tag tag--azure">Azure</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://apps.apple.com/us/app/selfquest/id6498150329" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="SelfQuest on the App Store">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                                </a>
+                                <a href="https://play.google.com/store/apps/details?id=com.jameskirkham.sq&amp;hl=en" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="SelfQuest on Google Play">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                                </a>
+                                <a href="https://selfquest.net" target="_blank" rel="noopener" class="project-card__link" aria-label="Website">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                            <button class="project-card__expand" aria-label="View project details">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Nuremi -->
+                    <div class="project-card reveal" data-project="nuremi">
+                        <div class="phone-mockup">
+                            <div class="device device-iphone-14-pro">
+                                <div class="device-frame">
+                                    <div class="device-screen phone-mockup__placeholder">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                        <span>Nuremi</span><small>Client project · details below</small>
+                                    </div>
+                                </div>
+                                <div class="device-stripe"></div>
+                                <div class="device-header"></div>
+                                <div class="device-sensors"></div>
+                                <div class="device-btns"></div>
+                                <div class="device-power"></div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">Nuremi</h4>
+                            <p class="project-card__desc">AI-powered concierge and interactive map application.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--react-native">React Native</span>
+                                <span class="tag tag--supabase">Supabase</span>
+                            </div>
+                            <div class="project-card__links">
+                            </div>
+                            <button class="project-card__expand" aria-label="View project details">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- SelfAware -->
+                    <div class="project-card reveal" data-project="selfaware">
+                        <div class="phone-mockup">
+                            <div class="device device-iphone-14-pro">
+                                <div class="device-frame">
+                                    <img class="device-screen" src="assets/images/projects/selfaware/main.webp" loading="lazy" decoding="async" alt="SelfAware screenshot">
+                                </div>
+                                <div class="device-stripe"></div>
+                                <div class="device-header"></div>
+                                <div class="device-sensors"></div>
+                                <div class="device-btns"></div>
+                                <div class="device-power"></div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">SelfAware</h4>
+                            <p class="project-card__desc">AI-first concierge and life OS app with agentic AI, RAG, and real-time streaming.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--react-native">React Native</span>
+                                <span class="tag tag--supabase">Supabase</span>
+                                <span class="tag tag--web">OpenAI</span>
+                            </div>
+                            <div class="project-card__links">
+                            </div>
+                            <button class="project-card__expand" aria-label="View project details">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- SelfGrow -->
+                    <div class="project-card reveal" data-project="selfgrow">
+                        <div class="phone-mockup">
+                            <div class="device device-iphone-14-pro">
+                                <div class="device-frame">
+                                    <img class="device-screen" src="assets/images/projects/selfgrow/main.webp" loading="lazy" decoding="async" alt="SelfGrow screenshot">
+                                </div>
+                                <div class="device-stripe"></div>
+                                <div class="device-header"></div>
+                                <div class="device-sensors"></div>
+                                <div class="device-btns"></div>
+                                <div class="device-power"></div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">SelfGrow</h4>
+                            <p class="project-card__desc">Offline-first habit-breaking iOS app with social accountability and group challenges.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--swift">SwiftUI</span>
+                                <span class="tag tag--supabase">Supabase</span>
+                            </div>
+                            <div class="project-card__links">
+                            </div>
+                            <button class="project-card__expand" aria-label="View project details">View Details</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Websites -->
+            <div class="projects__group">
+                <h3 class="projects__group-title reveal">Websites</h3>
+                <div class="projects__grid projects__grid--web">
+
+                    <!-- SelfQuest.net -->
+                    <div class="project-card project-card--web reveal">
+                        <div class="browser-mockup">
+                            <div class="browser-mockup__toolbar">
+                                <div class="browser-mockup__dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="browser-mockup__url">
+                                    <span>selfquest.net</span>
+                                </div>
+                            </div>
+                            <div class="browser-mockup__viewport">
+                                <div class="browser-mockup__fallback browser-mockup__fallback--visible">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                    <span>selfquest.net</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">SelfQuest.net</h4>
+                            <p class="project-card__desc">Landing page and marketing website for the SelfQuest app.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--web">Web</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://selfquest.net" target="_blank" rel="noopener" class="project-card__link" aria-label="Visit site">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Xuabelle -->
+                    <div class="project-card project-card--web reveal">
+                        <div class="browser-mockup">
+                            <div class="browser-mockup__toolbar">
+                                <div class="browser-mockup__dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="browser-mockup__url">
+                                    <span>xuabelle.vercel.app</span>
+                                </div>
+                            </div>
+                            <div class="browser-mockup__viewport">
+                                <div class="browser-mockup__fallback browser-mockup__fallback--visible">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                    <span>xuabelle.vercel.app</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card__info">
+                            <h4 class="project-card__name">Xuabelle</h4>
+                            <p class="project-card__desc">Concept jewellery website built for my girlfriend.</p>
+                            <div class="project-card__tags">
+                                <span class="tag tag--web">Web</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://xuabelle.vercel.app/" target="_blank" rel="noopener" class="project-card__link" aria-label="Visit site">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROJECT DETAIL MODAL ============ -->
+    <dialog class="modal" id="projectModal" aria-labelledby="modalTitle">
+        <div class="modal__backdrop" id="modalBackdrop"></div>
+        <div class="modal__container">
+            <button type="button" class="modal__close" id="modalClose" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal__body">
+                <div class="modal__screenshots">
+                    <div class="modal__phone-row" id="modalPhones">
+                        <!-- Phone mockups injected by JS -->
+                    </div>
+                </div>
+                <div class="modal__details">
+                    <h2 class="modal__title" id="modalTitle"></h2>
+                    <p class="modal__role" id="modalRole"></p>
+                    <p class="modal__desc" id="modalDesc"></p>
+                    <div class="modal__tags" id="modalTags"></div>
+                    <div class="modal__socials" id="modalSocials"></div>
+                    <div class="modal__highlights" id="modalHighlights"></div>
+                    <div class="modal__actions" id="modalActions"></div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section__title reveal">Experience</h2>
+            <div class="timeline">
+                <div class="timeline__item timeline__item--current reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Current <span class="current-badge">Allied</span></span>
+                        <h4 class="timeline__title">Software engineering</h4>
+                        <p class="timeline__company">Allied</p>
+                        <p class="timeline__desc">Contributing across web applications, AI tooling, data workflows and infrastructure in the defence sector.</p>
+                        <div class="experience__technologies" aria-label="Selected technologies from recent Allied contributions">
+                            <span class="tag tag--web">TypeScript</span><span class="tag tag--web">React</span><span class="tag tag--web">Next.js</span><span class="tag tag--web">TanStack</span><span class="tag tag--web">Python</span><span class="tag tag--web">PostgreSQL</span><span class="tag tag--web">Temporal</span><span class="tag tag--web">Terraform</span>
+                        </div>
+                        <p class="experience__note">Project details remain confidential.</p>
+                    </div>
+                </div>
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Mar 2024 — Present</span>
+                        <h4 class="timeline__title">Founder & Lead Engineer</h4>
+                        <p class="timeline__company">Self Platform (SelfQuest, SelfAware, SelfGrow)</p>
+                        <p class="timeline__desc">Building a platform of consumer apps focused on fitness, AI-powered personal assistance, and habit change. Solo-architecting and shipping across three frameworks (Flutter, React Native, SwiftUI) with independent backends.</p>
+                        <ul class="timeline__highlights">
+                            <li><strong>SelfQuest</strong> — Gamified fitness tracker with 1.3M+ downloads and 100K DAU. Solo-built in Flutter/Dart with .NET 8 / ASP.NET Core backend on Azure. Real-time PvP multiplayer (SignalR), guild/social system, gamification engine, content moderation, ML Kit pose detection, RevenueCat monetisation, and PostHog analytics. Localised to 10+ languages. 16K Discord members, 72K TikTok followers.</li>
+                            <li><strong>SelfAware</strong> — AI-first concierge / life OS app in React Native (Expo/TypeScript) with Supabase backend. Agentic AI system using OpenAI Responses API with custom MCP tooling, RAG pipeline with pgvector embeddings, real-time streaming chat (SSE), multi-modal input (Vision, Whisper), and 5+ third-party API integrations (Amadeus, Ticketmaster, Google Places).</li>
+                            <li><strong>SelfGrow</strong> — Offline-first habit-breaking iOS app in SwiftUI with sync queue, network monitoring, and automatic local-to-cloud migration. Social accountability via Supabase Realtime, WidgetKit home screen widgets, Sign in with Apple (PKCE), and RevenueCat subscriptions.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Nov 2025 — Feb 2026</span>
+                        <h4 class="timeline__title">Lead Software Engineer & Technical Consultant</h4>
+                        <p class="timeline__company">Nuremi</p>
+                        <p class="timeline__desc">Built AI-powered concierge and interactive map application in React Native (Expo/TypeScript) with Supabase backend, powered by Anthropic Claude API with personality layer and multi-turn conversation context. Architected RAG pipeline with pgvector, integrated 5 Google Places API endpoints, and designed custom venue ranking algorithm with weighted scoring. Led all architecture decisions, UX design, and end-to-end implementation.</p>
+                    </div>
+                </div>
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Oct 2022 — Oct 2024</span>
+                        <h4 class="timeline__title">Full Stack Software Engineer</h4>
+                        <p class="timeline__company">Siemens</p>
+                        <p class="timeline__desc">Developed manufacturing applications using C#, Blazor, .NET, and SQL Server to streamline production workflows. Built frontend UIs, RESTful APIs, and backend logic in an Agile team using GitKraken and Azure DevOps.</p>
+                    </div>
+                </div>
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Aug 2021 — Sep 2022</span>
+                        <h4 class="timeline__title">Apprentice Support Engineer</h4>
+                        <p class="timeline__company">J2 Innovations</p>
+                        <p class="timeline__desc">Coordinated project tasks ensuring adherence to engineering standards and regulations. Managed internal bug tickets for users of the FIN Stack building management system (HVAC).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <h3 class="section__subtitle reveal" style="margin-top: var(--space-4xl); margin-bottom: var(--space-2xl);">Education</h3>
+            <div class="timeline">
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Oct 2024 — Feb 2025</span>
+                        <h4 class="timeline__title">Founders University</h4>
+                        <p class="timeline__desc">Competitive 12-week accelerator. Offered $25K for 2.5% equity by Jason Calacanis (declined).</p>
+                    </div>
+                </div>
+                <div class="timeline__item reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__date">Nov 2022 — Oct 2024</span>
+                        <h4 class="timeline__title">Ada College of Technology</h4>
+                        <p class="timeline__desc">Computer Engineering Apprenticeship/Degree (2 years completed).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RECOGNITION ============ -->
+    <section class="section recognition" id="recognition">
+        <div class="container">
+            <h2 class="section__title reveal">Recognition</h2>
+            <div class="recognition__grid">
+                <div class="recognition__card reveal">
+                    <div class="recognition__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h4 class="recognition__title">1.3M+ Downloads</h4>
+                    <p class="recognition__desc">Solo-founded SelfQuest to 1.3M+ downloads, demonstrating end-to-end product capability from UX to cloud deployment.</p>
+                </div>
+                <div class="recognition__card reveal">
+                    <div class="recognition__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h4 class="recognition__title">Founders University</h4>
+                    <p class="recognition__desc">Selected for competitive 12-week accelerator. Offered $25K investment by Jason Calacanis — declined to maintain full ownership.</p>
+                </div>
+                <div class="recognition__card reveal">
+                    <div class="recognition__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg>
+                    </div>
+                    <h4 class="recognition__title">Press Coverage</h4>
+                    <p class="recognition__desc">Featured in <a href="https://www.techtudo.com.br/dicas-e-tutoriais/2024/08/selfquest-conheca-app-fitness-para-gamers-que-mistura-jogo-e-exercicios-edapps.ghtml" target="_blank" rel="noopener">TechTudo</a> (Globo, Brazil) — "SelfQuest: the fitness app for gamers that combines gaming and exercise".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BLOG ============ -->
+    <section class="section blog" id="blog">
+        <div class="container">
+            <h2 class="section__title reveal">Blog</h2>
+            <p class="section__subtitle reveal">Thoughts on development, design, and building products.</p>
+            <div class="blog__grid">
+                <article class="blog-card reveal">
+                    <div class="blog-card__image">
+                        <div class="blog-card__placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="blog-card__content">
+                        <span class="blog-card__date">Coming Soon</span>
+                        <h4 class="blog-card__title">How I Scaled SelfQuest to 1.3M Downloads</h4>
+                        <p class="blog-card__excerpt">The technical and growth story behind building a solo app to over a million users.</p>
+                        <span class="blog-card__link blog-card__pending">Article coming soon</span>
+                    </div>
+                </article>
+                <article class="blog-card reveal">
+                    <div class="blog-card__image">
+                        <div class="blog-card__placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="blog-card__content">
+                        <span class="blog-card__date">Coming Soon</span>
+                        <h4 class="blog-card__title">Flutter vs React Native vs Swift</h4>
+                        <p class="blog-card__excerpt">Lessons learned from building production apps in all three — when to use what.</p>
+                        <span class="blog-card__link blog-card__pending">Article coming soon</span>
+                    </div>
+                </article>
+                <article class="blog-card reveal">
+                    <div class="blog-card__image">
+                        <div class="blog-card__placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="blog-card__content">
+                        <span class="blog-card__date">Coming Soon</span>
+                        <h4 class="blog-card__title">Building Community-Driven Growth</h4>
+                        <p class="blog-card__excerpt">How TikTok and Discord became the growth engine for a fitness app.</p>
+                        <span class="blog-card__link blog-card__pending">Article coming soon</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section__title reveal">Get In Touch</h2>
+            <p class="section__subtitle reveal">Have a project in mind or just want to chat? I'd love to hear from you.</p>
+            <div class="contact__grid">
+                <form class="contact__form reveal" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-input form-textarea" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">Open Email Draft</button>
+                    <p class="form-note">Opens your email app with your message filled in. You review and send it there.</p>
+                </form>
+                <div class="contact__info reveal">
+                    <div class="contact__info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <div>
+                            <p class="contact__info-label">Email</p>
+                            <a href="mailto:james.kirkham00@gmail.com" class="contact__info-value">james.kirkham00@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact__info-item">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        <div>
+                            <p class="contact__info-label">GitHub</p>
+                            <a href="https://github.com/littlekirkycode" target="_blank" rel="noopener" class="contact__info-value">@littlekirkycode</a>
+                        </div>
+                    </div>
+                    <div class="contact__info-item">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <div>
+                            <p class="contact__info-label">LinkedIn</p>
+                            <a href="https://www.linkedin.com/in/james-kirkham-a965831b9/" target="_blank" rel="noopener" class="contact__info-value">Connect with me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     </main>
-    <footer class="container site-footer">
-      <a class="wordmark" href="#top" aria-label="Back to top"
-        >jk<span>.</span></a
-      >
-      <p>© <span id="year">2026</span> James Kirkham</p>
-      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__left">
+                <a href="#hero" class="footer__logo">JK<span class="accent">.</span></a>
+                <p class="footer__credit">Built by James Kirkham</p>
+            </div>
+            <ul class="footer__links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="footer__socials">
+                <a href="https://github.com/littlekirkycode" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/james-kirkham-a965831b9/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 James Kirkham. All rights reserved.</p>
+        </div>
     </footer>
-  </body>
+
+    <dialog class="screenshot-viewer" id="screenshotViewer" aria-labelledby="viewerTitle">
+        <div class="viewer__header"><h2 id="viewerTitle">App screenshot</h2><button type="button" class="gallery-button" id="viewerClose" aria-label="Close full-screen screenshot">×</button></div>
+        <div class="viewer__stage" id="viewerStage"><button type="button" class="gallery-button" id="viewerPrevious" aria-label="Previous screenshot">←</button><img id="viewerImage" alt=""><button type="button" class="gallery-button" id="viewerNext" aria-label="Next screenshot">→</button></div>
+        <p class="viewer__caption" id="viewerCaption" aria-live="polite"></p>
+    </dialog>
+    <script src="js/main.js?v=original-ux-2"></script>
+</body>
 </html>
