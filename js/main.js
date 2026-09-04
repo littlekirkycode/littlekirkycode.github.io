@@ -274,7 +274,15 @@
       if (event.target.closest('a, .phone-controls') || Date.now() - lastSwipe < 300) return;
       openModal(id, event.target.closest('button,[tabindex]') || detailButton);
     });
-    if (!data.screens.length) return;
+    if (!data.screens.length) {
+      const note = document.createElement('div');
+      note.className = 'phone-controls';
+      const label = document.createElement('span');
+      label.className = 'phone-controls__count';
+      label.textContent = 'Client project';
+      note.append(label); mockup.after(note);
+      return;
+    }
     selectedScreens[id] = 0;
     const controls = document.createElement('div'); controls.className = 'phone-controls'; controls.setAttribute('role','group'); controls.setAttribute('aria-label', `${data.title} preview screens`);
     const count = document.createElement('span'); count.className = 'phone-controls__count'; count.setAttribute('aria-live', 'polite'); count.textContent = `1 / ${data.screens.length}`;
