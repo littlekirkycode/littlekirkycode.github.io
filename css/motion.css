@@ -1,0 +1,94 @@
+/* Light and movement around the original portfolio, without changing its layout. */
+.hero__bg {
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 3% 36%, rgba(21, 119, 231, 0.19), transparent 40%),
+    radial-gradient(ellipse at 95% 20%, rgba(120, 74, 230, 0.19), transparent 38%),
+    radial-gradient(ellipse at 75% 94%, rgba(27, 146, 197, 0.12), transparent 40%);
+}
+.hero__field {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.72) 26%, transparent 64%),
+    linear-gradient(transparent 72%, var(--bg));
+}
+[data-theme='light'] .hero__bg {
+  background:
+    radial-gradient(ellipse at 3% 36%, rgba(53, 154, 255, 0.14), transparent 42%),
+    radial-gradient(ellipse at 95% 20%, rgba(148, 108, 235, 0.13), transparent 38%),
+    radial-gradient(ellipse at 75% 94%, rgba(51, 161, 195, 0.09), transparent 40%);
+}
+[data-theme='light'] .hero__bg::after {
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(250, 250, 250, 0.98) 0%, rgba(250, 250, 250, 0.84) 26%, transparent 64%),
+    linear-gradient(transparent 72%, var(--bg));
+}
+.hero__motion-toggle {
+  position: absolute;
+  right: max(22px, calc((100vw - 1200px) / 2));
+  bottom: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  font: 11px var(--font);
+  cursor: pointer;
+  transition: color 180ms, border-color 180ms, background 180ms;
+}
+.hero__motion-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-light);
+  background: var(--bg-card);
+}
+.hero__motion-toggle svg { width: 12px; height: 12px; }
+.hero__motion-toggle .motion-play,
+.hero__motion-toggle[aria-pressed='true'] .motion-pause { display: none; }
+.hero__motion-toggle[aria-pressed='true'] .motion-play { display: block; }
+.hero__content > .reveal { transition: none; }
+.phone-mockup { padding-top: 8px; }
+.phone-mockup .device {
+  transition: translate 280ms cubic-bezier(.22, 1, .36, 1), filter 280ms;
+}
+.phone-mockup .device-frame,
+.viewer__stage { position: relative; }
+.screen-fade {
+  position: absolute !important;
+  pointer-events: none;
+  z-index: 1;
+  min-width: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+.gallery-stage__zoom { z-index: 2; }
+.modal__container { animation-duration: 240ms; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card[data-project]:hover .device,
+  .project-card[data-project]:focus-within .device {
+    translate: 0 -6px;
+    filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.16));
+  }
+}
+@media (max-width: 768px) {
+  .hero { padding-bottom: 80px; }
+  .hero__motion-toggle { right: 16px; bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__motion-toggle { display: none; }
+  .phone-mockup .device { transition: none; }
+}

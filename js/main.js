@@ -167,6 +167,13 @@
   let viewerOpener = null;
   let lastSwipe = 0;
   const wrapIndex = (index, length) => (index + length) % length;
+  const previewImage = url => url.replace('assets/images/projects/', 'assets/images/previews/');
+  function preloadNeighbours(screens, index, fullSize = false) {
+    for (const direction of [-1, 1]) {
+      const url = screens[wrapIndex(index + direction, screens.length)];
+      window.PortfolioMedia?.preload(fullSize ? url : previewImage(url));
+    }
+  }
   const makeButton = (label, text, onClick) => {
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'gallery-button';
@@ -174,10 +181,11 @@
     button.addEventListener('click', onClick); return button;
   };
   function setImage(image, url, alt) {
+    if (window.PortfolioMedia) return window.PortfolioMedia.swap(image, url, alt);
     image.alt = alt; image.draggable = false;
     image.onerror = () => {
       image.onerror = null;
-      if (url.endsWith('.webp')) image.src = url.replace(/\.webp$/, '.png');
+      if (url.endsWith('.webp')) image.src = url.replace('assets/images/previews/', 'assets/images/projects/').replace(/\.webp$/, '.png');
     };
     image.src = url;
   }
@@ -212,7 +220,8 @@
     if (!activeProject?.screens.length) return;
     galleryIndex = wrapIndex(nextIndex, activeProject.screens.length);
     const alt = `${activeProject.title} app screen ${galleryIndex + 1} of ${activeProject.screens.length}`;
-    setImage(document.getElementById('galleryImage'), activeProject.screens[galleryIndex], alt);
+    setImage(document.getElementById('galleryImage'), previewImage(activeProject.screens[galleryIndex]), alt);
+    preloadNeighbours(activeProject.screens, galleryIndex);
     document.getElementById('galleryCount').textContent = `Screen ${galleryIndex + 1} / ${activeProject.screens.length}`;
     modalPhones.querySelectorAll('.gallery-thumbnail').forEach((button, index) => button.setAttribute('aria-pressed', String(index === galleryIndex)));
     if (viewer.open) renderViewer();
@@ -237,7 +246,7 @@
     const thumbnails = document.createElement('div'); thumbnails.className = 'gallery-thumbnails'; thumbnails.setAttribute('role', 'group'); thumbnails.setAttribute('aria-label', 'Choose an app screenshot');
     activeProject.screens.forEach((url, index) => {
       const button = document.createElement('button'); button.type = 'button'; button.className = 'gallery-thumbnail'; button.setAttribute('aria-label', `Show screenshot ${index + 1}`);
-      const thumbnail = document.createElement('img'); thumbnail.loading = 'lazy'; thumbnail.alt = ''; thumbnail.src = url;
+      const thumbnail = document.createElement('img'); thumbnail.loading = 'lazy'; thumbnail.decoding = 'async'; thumbnail.alt = ''; thumbnail.src = previewImage(url);
       button.append(thumbnail); button.addEventListener('click', () => updateGallery(index)); thumbnails.append(button);
     });
     modalPhones.append(stage, controls, thumbnails);
@@ -263,6 +272,14 @@
   modalClose.addEventListener('click', () => hideDialog(modal));
   document.getElementById('modalBackdrop').addEventListener('click', () => hideDialog(modal));
   modal.addEventListener('close', () => { modal.classList.remove('open'); syncScrollLock(); modalOpener?.focus(); });
+  const previewObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.dataset.project;
+      preloadNeighbours(projectData[id].screens, selectedScreens[id] || 0);
+      previewObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: '160px', threshold: 0 }) : null;
   document.querySelectorAll('#appGrid .project-card[data-project]').forEach(card => {
     const id = card.dataset.project, data = projectData[id];
     const mockup = card.querySelector('.phone-mockup');
@@ -289,19 +306,27 @@
     const changeScreen = direction => {
       selectedScreens[id] = wrapIndex(selectedScreens[id] + direction, data.screens.length);
       const index = selectedScreens[id];
-      setImage(card.querySelector('img.device-screen'), data.screens[index], `${data.title} app screen ${index + 1} of ${data.screens.length}`);
+      setImage(card.querySelector('img.device-screen'), previewImage(data.screens[index]), `${data.title} app screen ${index + 1} of ${data.screens.length}`);
+      preloadNeighbours(data.screens, index);
       count.textContent = `${index + 1} / ${data.screens.length}`;
     };
     controls.append(makeButton(`Previous ${data.title} preview`, '←', () => changeScreen(-1)), count, makeButton(`Next ${data.title} preview`, '→', () => changeScreen(1)));
     mockup.after(controls); bindSwipe(mockup, changeScreen);
+    previewObserver?.observe(card);
   });
   function renderViewer() {
     const alt = `${activeProject.title} — screen ${galleryIndex + 1} of ${activeProject.screens.length}`;
     document.getElementById('viewerTitle').textContent = activeProject.title;
     document.getElementById('viewerCaption').textContent = `${alt} · Use arrows or swipe to browse`;
     setImage(document.getElementById('viewerImage'), activeProject.screens[galleryIndex], alt);
+    preloadNeighbours(activeProject.screens, galleryIndex, true);
   }
-  function openViewer(opener) { viewerOpener = opener; renderViewer(); showDialog(viewer); document.getElementById('viewerClose').focus(); }
+  function openViewer(opener) {
+    viewerOpener = opener;
+    // Display the small screen immediately while its full-resolution version decodes.
+    document.getElementById('viewerImage').src = previewImage(activeProject.screens[galleryIndex]);
+    renderViewer(); showDialog(viewer); document.getElementById('viewerClose').focus();
+  }
   document.getElementById('viewerClose').addEventListener('click', () => hideDialog(viewer));
   document.getElementById('viewerPrevious').addEventListener('click', () => updateGallery(galleryIndex - 1));
   document.getElementById('viewerNext').addEventListener('click', () => updateGallery(galleryIndex + 1));
