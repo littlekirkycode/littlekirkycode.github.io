@@ -157,14 +157,47 @@
     { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.jameskirkham.sq&hl=en' },
     { label: 'Visit Website', url: 'https://selfquest.net' },
   ];
+  // Captions describe the existing public screenshots, in their original order.
+  const screenNotes = {
+    selfquest: [
+      ['Character & progression', 'Real-world habits become character levels, stats and gear.'],
+      ['Goals, made playable', 'A gamified fitness experience built in Flutter for iOS and Android.'],
+      ['Habits & daily goals', 'Daily habits and completion tracking feed into RPG progression.'],
+      ['The adventure map', 'A map of adventures gives the fitness journey a world to explore.'],
+      ['Gear & rewards', 'Chests, skins and equipment bring character progression to life.'],
+    ],
+    selfaware: [
+      ['Your day, at a glance', 'AI briefings, tasks and upcoming plans together on the home screen.'],
+      ['An AI life OS', 'A React Native app combining AI assistance with everyday planning.'],
+      ['Daily briefing', 'A personalised briefing with quick actions for planning the day.'],
+      ['Readiness & activity', 'Readiness, workouts and training plans in a single overview.'],
+      ['Nutrition tracking', 'Meal logging and daily nutrition totals in one focused view.'],
+      ['Planning with friends', 'Shared plans, upcoming events and invitations in one flow.'],
+    ],
+    selfgrow: [
+      ['Your habit journey', 'Daily check-ins, milestones and progress on the home screen.'],
+      ['Habits & accountability', 'A native Swift app built around habit change and community support.'],
+      ['The daily check-in', 'Check in, track a streak and see time and money saved.'],
+      ['Progress & insights', 'Streaks, consistency and savings make progress easy to see.'],
+      ['Support groups', 'Group check-ins keep shared progress and encouragement close.'],
+      ['Support in the moment', 'Quick support options and a breathing exercise for difficult moments.'],
+    ],
+  };
   for (const [id, data] of Object.entries(projectData)) {
     data.screens = data.galleryImages ? [`assets/images/projects/${id}/main.webp`, ...data.galleryImages.map(url => url.replace(/\.png$/, '.webp'))] : [];
+    data.notes = screenNotes[id] || [];
   }
   const selectedScreens = {};
+  const cardRenderers = {};
   let activeProject = null;
+  let activeProjectId = null;
   let galleryIndex = 0;
   let modalOpener = null;
   let viewerOpener = null;
+  let modalOpening = false;
+  let modalClosing = false;
+  let viewerOpening = false;
+  let viewerClosing = false;
   let lastSwipe = 0;
   const wrapIndex = (index, length) => (index + length) % length;
   const previewImage = url => url.replace('assets/images/projects/', 'assets/images/previews/');
@@ -188,6 +221,21 @@
       if (url.endsWith('.webp')) image.src = url.replace('assets/images/previews/', 'assets/images/projects/').replace(/\.webp$/, '.png');
     };
     image.src = url;
+    return true;
+  }
+  function afterImage(result, callback) {
+    if (result?.then) result.then(loaded => { if (loaded) callback(); });
+    else if (result !== false) callback();
+  }
+  function writeCaption(element, note) {
+    element.replaceChildren();
+    const title = document.createElement('strong'); title.textContent = note[0];
+    const description = document.createElement('span'); description.textContent = note[1];
+    element.append(title, ' ', description);
+  }
+  function runTransition(options) {
+    if (window.PortfolioTransitions) window.PortfolioTransitions.run(options);
+    else options.update();
   }
   function bindSwipe(element, callback) {
     let start = null;
@@ -219,8 +267,16 @@
   function updateGallery(nextIndex) {
     if (!activeProject?.screens.length) return;
     galleryIndex = wrapIndex(nextIndex, activeProject.screens.length);
-    const alt = `${activeProject.title} app screen ${galleryIndex + 1} of ${activeProject.screens.length}`;
-    setImage(document.getElementById('galleryImage'), previewImage(activeProject.screens[galleryIndex]), alt);
+    const project = activeProject, index = galleryIndex;
+    const alt = `${project.title}: ${project.notes[index][0]} (screen ${index + 1} of ${project.screens.length})`;
+    const image = document.getElementById('galleryImage');
+    const result = setImage(image, previewImage(project.screens[index]), alt);
+    afterImage(result, () => {
+      if (activeProject === project && galleryIndex === index) {
+        image.dataset.screenIndex = String(index);
+        writeCaption(document.getElementById('galleryCaption'), project.notes[index]);
+      }
+    });
     preloadNeighbours(activeProject.screens, galleryIndex);
     document.getElementById('galleryCount').textContent = `Screen ${galleryIndex + 1} / ${activeProject.screens.length}`;
     modalPhones.querySelectorAll('.gallery-thumbnail').forEach((button, index) => button.setAttribute('aria-pressed', String(index === galleryIndex)));
@@ -235,27 +291,38 @@
     }
     const stage = document.createElement('button'); stage.type = 'button'; stage.className = 'gallery-stage';
     stage.setAttribute('aria-label', `View ${activeProject.title} screenshot full screen`);
+    stage.setAttribute('aria-describedby', 'galleryCaption');
     const image = document.createElement('img'); image.id = 'galleryImage';
+    const cardImage = document.querySelector(`#appGrid [data-project="${activeProjectId}"] img.device-screen`);
+    const visibleIndex = Number(cardImage?.dataset.screenIndex) || 0;
+    // Keep a decoded preview on screen while the gallery opens and requests settle.
+    image.src = cardImage?.currentSrc || cardImage?.src || previewImage(activeProject.screens[galleryIndex]);
+    image.alt = cardImage?.alt || `${activeProject.title} screenshot`;
+    image.dataset.screenIndex = String(visibleIndex);
     const zoom = document.createElement('span'); zoom.className = 'gallery-stage__zoom'; zoom.textContent = 'View full screen ↗';
     stage.append(image, zoom);
     stage.addEventListener('click', () => { if (Date.now() - lastSwipe > 300) openViewer(stage); });
     bindSwipe(stage, direction => updateGallery(galleryIndex + direction));
     const controls = document.createElement('div'); controls.className = 'gallery-controls';
+    const caption = document.createElement('p'); caption.id = 'galleryCaption'; caption.className = 'gallery-caption';
+    writeCaption(caption, activeProject.notes[visibleIndex]);
     const count = document.createElement('span'); count.id = 'galleryCount'; count.className = 'gallery-count'; count.setAttribute('aria-live', 'polite');
     controls.append(makeButton('Previous gallery screenshot', '←', () => updateGallery(galleryIndex - 1)), count, makeButton('Next gallery screenshot', '→', () => updateGallery(galleryIndex + 1)));
     const thumbnails = document.createElement('div'); thumbnails.className = 'gallery-thumbnails'; thumbnails.setAttribute('role', 'group'); thumbnails.setAttribute('aria-label', 'Choose an app screenshot');
     activeProject.screens.forEach((url, index) => {
-      const button = document.createElement('button'); button.type = 'button'; button.className = 'gallery-thumbnail'; button.setAttribute('aria-label', `Show screenshot ${index + 1}`);
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'gallery-thumbnail'; button.setAttribute('aria-label', `Show screenshot ${index + 1}: ${activeProject.notes[index][0]}`); button.title = activeProject.notes[index][0];
       const thumbnail = document.createElement('img'); thumbnail.loading = 'lazy'; thumbnail.decoding = 'async'; thumbnail.alt = ''; thumbnail.src = previewImage(url);
       button.append(thumbnail); button.addEventListener('click', () => updateGallery(index)); thumbnails.append(button);
     });
-    modalPhones.append(stage, controls, thumbnails);
+    modalPhones.append(stage, controls, caption, thumbnails);
     updateGallery(galleryIndex);
   }
   function openModal(id, opener) {
     const data = projectData[id]; if (!data) return;
+    if (modal.open || modalOpening) return;
     if (menuOpen) setMenu(false);
-    activeProject = data; galleryIndex = selectedScreens[id] || 0; modalOpener = opener || document.activeElement;
+    activeProject = data; activeProjectId = id; galleryIndex = selectedScreens[id] || 0; modalOpener = opener || document.activeElement;
+    modal.dataset.project = id;
     document.getElementById('modalTitle').textContent = data.title;
     document.getElementById('modalRole').textContent = data.role;
     document.getElementById('modalDesc').textContent = data.desc;
@@ -267,11 +334,34 @@
     data.highlights.forEach(text => { const item = document.createElement('div'); item.className = 'modal__highlight'; item.textContent = text; highlights.append(item); });
     const actions = document.getElementById('modalActions'); actions.replaceChildren();
     data.links.filter(link => link.url !== '#').forEach(link => { const a = document.createElement('a'); a.href = link.url; a.className = 'btn btn--primary'; a.textContent = link.label; a.target = '_blank'; a.rel = 'noopener noreferrer'; actions.append(a); });
-    renderGallery(); showDialog(modal); modal.querySelector('.modal__container').scrollTop = 0; modalClose.focus();
+    renderGallery();
+    modalOpening = true;
+    runTransition({
+      from: document.querySelector(`#appGrid [data-project="${id}"] img.device-screen`),
+      to: () => document.getElementById('galleryImage'),
+      panel: modal.querySelector('.modal__container'),
+      update: () => {
+        showDialog(modal); modal.querySelector('.modal__container').scrollTop = 0;
+        modalClose.focus({ preventScroll: true }); modalOpening = false;
+      },
+    });
   }
-  modalClose.addEventListener('click', () => hideDialog(modal));
-  document.getElementById('modalBackdrop').addEventListener('click', () => hideDialog(modal));
-  modal.addEventListener('close', () => { modal.classList.remove('open'); syncScrollLock(); modalOpener?.focus(); });
+  function closeModal() {
+    if (!modal.open || modalClosing) return;
+    modalClosing = true;
+    runTransition({
+      from: document.getElementById('galleryImage'),
+      to: () => document.querySelector(`#appGrid [data-project="${activeProjectId}"] img.device-screen`),
+      update: () => {
+        cardRenderers[activeProjectId]?.(galleryIndex, true);
+        hideDialog(modal); modalClosing = false;
+      },
+    });
+  }
+  modalClose.addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+  modal.addEventListener('cancel', event => { event.preventDefault(); closeModal(); });
+  modal.addEventListener('close', () => { modal.classList.remove('open'); modalOpening = modalClosing = false; syncScrollLock(); modalOpener?.focus({ preventScroll: true }); });
   const previewObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -298,44 +388,87 @@
       label.className = 'phone-controls__count';
       label.textContent = 'Client project';
       note.append(label); mockup.after(note);
+      const caption = document.createElement('p'); caption.className = 'phone-caption';
+      writeCaption(caption, ['Built for a client', 'Architecture, UX and implementation. Explore the project details below.']);
+      note.after(caption);
       return;
     }
     selectedScreens[id] = 0;
+    card.querySelector('img.device-screen').dataset.screenIndex = '0';
     const controls = document.createElement('div'); controls.className = 'phone-controls'; controls.setAttribute('role','group'); controls.setAttribute('aria-label', `${data.title} preview screens`);
     const count = document.createElement('span'); count.className = 'phone-controls__count'; count.setAttribute('aria-live', 'polite'); count.textContent = `1 / ${data.screens.length}`;
-    const changeScreen = direction => {
-      selectedScreens[id] = wrapIndex(selectedScreens[id] + direction, data.screens.length);
-      const index = selectedScreens[id];
-      setImage(card.querySelector('img.device-screen'), previewImage(data.screens[index]), `${data.title} app screen ${index + 1} of ${data.screens.length}`);
+    const caption = document.createElement('p'); caption.className = 'phone-caption'; caption.id = `caption-${id}`;
+    writeCaption(caption, data.notes[0]); mockup.setAttribute('aria-describedby', caption.id);
+    function displayScreen(index, immediate = false) {
+      selectedScreens[id] = wrapIndex(index, data.screens.length);
+      index = selectedScreens[id];
+      const image = card.querySelector('img.device-screen');
+      const url = previewImage(data.screens[index]);
+      const alt = `${data.title}: ${data.notes[index][0]} (screen ${index + 1} of ${data.screens.length})`;
+      if (immediate) { image.src = url; image.alt = alt; }
+      const result = setImage(image, url, alt);
+      const applyCaption = () => {
+        if (selectedScreens[id] === index) {
+          image.dataset.screenIndex = String(index);
+          writeCaption(caption, data.notes[index]);
+        }
+      };
+      if (immediate) applyCaption(); else afterImage(result, applyCaption);
       preloadNeighbours(data.screens, index);
       count.textContent = `${index + 1} / ${data.screens.length}`;
-    };
+    }
+    cardRenderers[id] = displayScreen;
+    const changeScreen = direction => displayScreen(selectedScreens[id] + direction);
     controls.append(makeButton(`Previous ${data.title} preview`, '←', () => changeScreen(-1)), count, makeButton(`Next ${data.title} preview`, '→', () => changeScreen(1)));
-    mockup.after(controls); bindSwipe(mockup, changeScreen);
+    mockup.after(controls); controls.after(caption); bindSwipe(mockup, changeScreen);
     previewObserver?.observe(card);
   });
   function renderViewer() {
-    const alt = `${activeProject.title} — screen ${galleryIndex + 1} of ${activeProject.screens.length}`;
+    const project = activeProject, index = galleryIndex;
+    const alt = `${project.title}: ${project.notes[index][0]} (screen ${index + 1} of ${project.screens.length})`;
     document.getElementById('viewerTitle').textContent = activeProject.title;
-    document.getElementById('viewerCaption').textContent = `${alt} · Use arrows or swipe to browse`;
-    setImage(document.getElementById('viewerImage'), activeProject.screens[galleryIndex], alt);
+    const result = setImage(document.getElementById('viewerImage'), project.screens[index], alt);
+    afterImage(result, () => {
+      if (activeProject !== project || galleryIndex !== index) return;
+      const caption = document.getElementById('viewerCaption');
+      writeCaption(caption, project.notes[index]);
+      const hint = document.createElement('small'); hint.textContent = `Screen ${index + 1} / ${project.screens.length} · Use arrows or swipe to browse`;
+      caption.append(hint);
+    });
     preloadNeighbours(activeProject.screens, galleryIndex, true);
   }
   function openViewer(opener) {
+    if (viewer.open || viewerOpening) return;
     viewerOpener = opener;
     // Display the small screen immediately while its full-resolution version decodes.
     document.getElementById('viewerImage').src = previewImage(activeProject.screens[galleryIndex]);
-    renderViewer(); showDialog(viewer); document.getElementById('viewerClose').focus();
+    writeCaption(document.getElementById('viewerCaption'), activeProject.notes[galleryIndex]);
+    renderViewer(); viewerOpening = true;
+    runTransition({
+      from: document.getElementById('galleryImage'),
+      to: () => document.getElementById('viewerImage'),
+      update: () => { showDialog(viewer); document.getElementById('viewerClose').focus({ preventScroll: true }); viewerOpening = false; },
+    });
   }
-  document.getElementById('viewerClose').addEventListener('click', () => hideDialog(viewer));
+  function closeViewer() {
+    if (!viewer.open || viewerClosing) return;
+    viewerClosing = true;
+    runTransition({
+      from: document.getElementById('viewerImage'),
+      to: () => document.getElementById('galleryImage'),
+      update: () => { hideDialog(viewer); viewerClosing = false; },
+    });
+  }
+  document.getElementById('viewerClose').addEventListener('click', closeViewer);
+  viewer.addEventListener('cancel', event => { event.preventDefault(); closeViewer(); });
   document.getElementById('viewerPrevious').addEventListener('click', () => updateGallery(galleryIndex - 1));
   document.getElementById('viewerNext').addEventListener('click', () => updateGallery(galleryIndex + 1));
   bindSwipe(document.getElementById('viewerStage'), direction => updateGallery(galleryIndex + direction));
-  viewer.addEventListener('close', () => { viewer.classList.remove('open'); syncScrollLock(); viewerOpener?.focus(); });
+  viewer.addEventListener('close', () => { viewer.classList.remove('open'); viewerOpening = viewerClosing = false; syncScrollLock(); viewerOpener?.focus({ preventScroll: true }); });
   document.addEventListener('keydown', event => {
     if (viewer.open || modal.open) {
       if (activeProject?.screens.length && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) { event.preventDefault(); updateGallery(galleryIndex + (event.key === 'ArrowRight' ? 1 : -1)); }
-      if (event.key === 'Escape' && typeof (viewer.open ? viewer : modal).close !== 'function') { event.preventDefault(); hideDialog(viewer.open ? viewer : modal); }
+      if (event.key === 'Escape' && typeof (viewer.open ? viewer : modal).close !== 'function') { event.preventDefault(); if (viewer.open) closeViewer(); else closeModal(); }
       return;
     }
     if (!menuOpen) return;

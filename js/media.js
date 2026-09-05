@@ -44,7 +44,7 @@
     activeFades.delete(state);
   }
   async function swap(image, url, alt) {
-    if (!image) return;
+    if (!image) return false;
     let state = states.get(image);
     if (!state) { state = { request: 0 }; states.set(image, state); }
     const request = ++state.request;
@@ -52,15 +52,17 @@
     image.setAttribute('aria-busy', 'true');
     if (!image.getAttribute('src')) image.alt = alt;
     const loaded = await ready(url);
-    if (state.request !== request) return;
+    if (state.request !== request) return false;
     image.removeAttribute('aria-busy');
-    if (!loaded) return; // Keep the previous screen on a failed connection.
+    if (!loaded) return false; // Keep the previous screen on a failed connection.
     clearFade(state);
     const hasPrevious = image.complete && image.naturalWidth > 0;
     if (image.src !== loaded.src && hasPrevious && !motion.matches && image.animate && image.offsetWidth) {
       const overlay = image.cloneNode(false);
       overlay.removeAttribute('id');
       overlay.removeAttribute('aria-busy');
+      overlay.removeAttribute('data-gallery-transition');
+      overlay.style.removeProperty('view-transition-name');
       overlay.alt = '';
       overlay.setAttribute('aria-hidden', 'true');
       overlay.classList.add('screen-fade');
@@ -80,6 +82,7 @@
     }
     image.alt = alt;
     image.src = loaded.src;
+    return true;
   }
   function clearAllFades() { [...activeFades].forEach(clearFade); }
   motion.addEventListener('change', () => { if (motion.matches) clearAllFades(); });

@@ -92,3 +92,165 @@
   .hero__motion-toggle { display: none; }
   .phone-mockup .device { transition: none; }
 }
+
+/* Each app keeps its own colour, with light concentrated around the device. */
+[data-project='selfquest'] { --project-rgb: 81, 157, 246; }
+[data-project='selfaware'] { --project-rgb: 146, 130, 239; }
+[data-project='selfgrow'] { --project-rgb: 80, 185, 129; }
+[data-project='nuremi'] { --project-rgb: 84, 179, 196; }
+.project-card[data-project] {
+  position: relative;
+  isolation: isolate;
+  --light-x: 50%;
+  --light-y: 28%;
+}
+.project-card[data-project]::before,
+.project-card[data-project]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 260ms;
+}
+.project-card[data-project]::before {
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 29%, rgba(var(--project-rgb), 0.085), transparent 62%);
+}
+.project-card[data-project]::after {
+  padding: 1px;
+  opacity: 0;
+  background: radial-gradient(320px circle at var(--light-x) var(--light-y), rgba(var(--project-rgb), 0.75), transparent 75%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.project-card[data-project].is-pointing::after,
+.project-card[data-project]:focus-within::after { opacity: 1; }
+.phone-mockup {
+  --phone-scale: 0.55;
+  overflow: visible;
+}
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 64px;
+  left: 5%;
+  bottom: -6px;
+  background: radial-gradient(ellipse, rgba(var(--project-rgb), 0.15), transparent 70%);
+  pointer-events: none;
+}
+.phone-mockup .device {
+  transform: scale(var(--phone-scale)) perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 360ms cubic-bezier(.22, 1, .36, 1), translate 280ms cubic-bezier(.22, 1, .36, 1), filter 280ms;
+}
+.phone-mockup .device-frame::after {
+  content: '';
+  position: absolute;
+  inset: 19px;
+  z-index: 3;
+  border-radius: 40px;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse at var(--glass-x, 50%) 20%, rgba(255, 255, 255, 0.14), transparent 60%),
+    linear-gradient(125deg, transparent 25%, rgba(255, 255, 255, 0.085) 44%, transparent 64%);
+  transition: opacity 320ms;
+}
+.project-card.is-pointing .device-frame::after,
+.project-card:focus-within .device-frame::after { opacity: 0.75; }
+.phone-caption {
+  min-height: 96px;
+  margin: 14px 0 0;
+  padding-inline: 4px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.phone-caption strong {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.phone-caption strong::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 7px 2px 0;
+  border-radius: 50%;
+  background: rgb(var(--project-rgb));
+}
+.gallery-caption {
+  min-height: 78px;
+  padding: 12px 2px 4px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.gallery-caption strong {
+  display: block;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.gallery-stage {
+  background: radial-gradient(ellipse at 50% 40%, rgba(var(--project-rgb, 81, 157, 246), 0.08), transparent 80%), var(--bg-secondary);
+}
+.gallery-thumbnail[aria-pressed='true'] { border-color: rgb(var(--project-rgb, 81, 157, 246)); }
+.viewer__caption { max-width: 780px; margin-inline: auto; line-height: 1.6; }
+.viewer__caption strong { display: block; margin-bottom: 3px; color: #f0f0f0; font-weight: 500; }
+.viewer__caption small { display: block; color: #969ba5; font-size: 11px; margin-top: 4px; }
+.modal__container { animation: none; }
+::view-transition-group(portfolio-screen) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+  overflow: clip;
+}
+::view-transition-old(portfolio-screen),
+::view-transition-new(portfolio-screen) { height: 100%; object-fit: contain; }
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 220ms; mix-blend-mode: normal; }
+/* The timeline advances with reading progress; every role stays fully readable. */
+.timeline--animated::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform-origin: top;
+  transform: scaleY(var(--timeline-progress, 0));
+  background: linear-gradient(var(--accent), #9c7ae6);
+  box-shadow: 0 0 12px rgba(92, 130, 246, 0.2);
+  pointer-events: none;
+}
+.timeline--animated .timeline__dot {
+  background: var(--border-light);
+  transition: background-color 240ms, box-shadow 240ms;
+}
+.timeline--animated .is-reached .timeline__dot { background: var(--accent); }
+.timeline--animated .is-active .timeline__dot { box-shadow: 0 0 0 5px var(--accent-glow), 0 0 18px var(--accent-glow); }
+.timeline--animated .is-active .timeline__content {
+  border-color: rgba(104, 143, 231, 0.65);
+  box-shadow: 0 8px 32px rgba(68, 104, 184, 0.07);
+}
+@media (max-width: 768px) {
+  .phone-mockup { --phone-scale: 0.48; }
+  .timeline--animated::after { left: 7px; }
+}
+@media (max-width: 580px) {
+  .phone-mockup { --phone-scale: 0.55; }
+  .phone-caption { min-height: 76px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone-mockup .device { transform: scale(var(--phone-scale)); transition: none; }
+  .timeline--animated::after { transform: none; }
+  .timeline--animated .timeline__dot { background: var(--accent); }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
+}
